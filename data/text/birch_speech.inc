@@ -1,9 +1,9 @@
 gText_Birch_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is BIRCH.\p"
-	.string "But everyone calls me the POKéMON\n"
-	.string "PROFESSOR.\p"
+	.string "My name is SPRUCE.\p"
+	.string "I study the POKéMON that live\n"
+	.string "along the great river LETHYS.\p"
 	.string "$"
 
 gText_Birch_Pokemon::
@@ -12,8 +12,8 @@ gText_Birch_Pokemon::
 	.string "$"
 
 gText_Birch_MainSpeech::
-	.string "This world is widely inhabited by\n"
-	.string "creatures known as POKéMON.\p"
+	.string "The region of KALDRIA is shaped by\n"
+	.string "one great river, and by POKéMON.\p"
 	.string "We humans live alongside POKéMON,\n"
 	.string "at times as friendly playmates, and\l"
 	.string "at times as cooperative workmates.\p"
@@ -44,8 +44,8 @@ gText_Birch_SoItsPlayer::
 
 gText_Birch_YourePlayer::
 	.string "Ah, okay!\p"
-	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of LITTLEROOT.\l"
+	.string "You're {PLAYER}{KUN}, the grandchild of\n"
+	.string "my old friend in STILLBROOK.\l"
 	.string "I get it now!\p"
 	.string "$"
 
@@ -56,6 +56,6 @@ gText_Birch_AreYouReady::
 	.string "Take courage, and leap into the\n"
 	.string "world of POKéMON where dreams,\l"
 	.string "adventure, and friendships await!\p"
-	.string "Well, I'll be expecting you later.\n"
-	.string "Come see me in my POKéMON LAB.\p"
+	.string "The LETHYS remembers everything.\n"
+	.string "Follow it from source to sea!\p"
 	.string "$"
