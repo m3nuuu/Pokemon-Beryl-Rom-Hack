@@ -1,10 +1,10 @@
 {
   "id": "MAP_LANTERNCROSS_TEMPLE2F",
   "name": "Lanterncross_Temple2F",
-  "layout": "LAYOUT_MT_PYRE_2F",
-  "music": "MUS_MT_PYRE",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_MT_PYRE",
+  "layout": "LAYOUT_POKEMON_TOWER_2F",
+  "music": "MUS_RG_POKE_TOWER",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_POKEMON_TOWER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -12,6 +12,7 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
@@ -31,39 +32,18 @@
   ],
   "warp_events": [
     {
-      "x": 2,
-      "y": 1,
+      "x": 4,
+      "y": 10,
       "elevation": 3,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "4"
+      "dest_map": "MAP_LANTERNCROSS",
+      "dest_warp_id": "0"
     },
     {
-      "x": 10,
-      "y": 1,
+      "x": 18,
+      "y": 10,
       "elevation": 3,
       "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "4"
-    },
-    {
-      "x": 10,
-      "y": 12,
-      "elevation": 3,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "4"
-    },
-    {
-      "x": 6,
-      "y": 12,
-      "elevation": 3,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "4"
-    },
-    {
-      "x": 11,
-      "y": 9,
-      "elevation": 3,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "5"
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

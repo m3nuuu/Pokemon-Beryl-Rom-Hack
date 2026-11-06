@@ -2,7 +2,7 @@
   "map_sections": [
     {
       "id": "MAPSEC_LITTLEROOT_TOWN",
-      "name": "STILLBROOK",
+      "name": "LITTLEROOT TOWN",
       "x": 4,
       "y": 11,
       "width": 1,
@@ -66,7 +66,7 @@
     },
     {
       "id": "MAPSEC_SLATEPORT_CITY",
-      "name": "REEDMOUTH",
+      "name": "SLATEPORT CITY",
       "x": 8,
       "y": 10,
       "width": 1,
@@ -74,7 +74,7 @@
     },
     {
       "id": "MAPSEC_MAUVILLE_CITY",
-      "name": "VALECROWN CITY",
+      "name": "MAUVILLE CITY",
       "x": 8,
       "y": 6,
       "width": 2,
@@ -130,7 +130,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_101",
-      "name": "ROUTE 1",
+      "name": "ROUTE 101",
       "x": 4,
       "y": 10,
       "width": 1,
@@ -138,7 +138,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_102",
-      "name": "ROUTE 2",
+      "name": "ROUTE 102",
       "x": 2,
       "y": 9,
       "width": 2,
@@ -146,7 +146,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_103",
-      "name": "LETHYS DAM",
+      "name": "ROUTE 103",
       "x": 4,
       "y": 8,
       "width": 4,
@@ -154,7 +154,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_104",
-      "name": "ROUTE 3",
+      "name": "ROUTE 104",
       "x": 0,
       "y": 7,
       "width": 1,
@@ -162,7 +162,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_105",
-      "name": "ROUTE 4",
+      "name": "ROUTE 105",
       "x": 0,
       "y": 10,
       "width": 1,
@@ -170,7 +170,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_106",
-      "name": "LANTERNCROSS",
+      "name": "ROUTE 106",
       "x": 0,
       "y": 13,
       "width": 2,
@@ -178,7 +178,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_107",
-      "name": "LETHYS DELTA",
+      "name": "ROUTE 107",
       "x": 3,
       "y": 14,
       "width": 3,
@@ -186,7 +186,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_108",
-      "name": "VALECROWN BEACH",
+      "name": "ROUTE 108",
       "x": 6,
       "y": 14,
       "width": 2,
@@ -693,7 +693,7 @@
     },
     {
       "id": "MAPSEC_PALLET_TOWN",
-      "name": "PALLET TOWN",
+      "name": "STILLBROOK",
       "x": 4,
       "y": 11,
       "width": 1,
@@ -733,7 +733,7 @@
     },
     {
       "id": "MAPSEC_VERMILION_CITY",
-      "name": "VERMILION CITY",
+      "name": "REEDMOUTH",
       "x": 14,
       "y": 9,
       "width": 1,
@@ -741,7 +741,7 @@
     },
     {
       "id": "MAPSEC_CELADON_CITY",
-      "name": "CELADON CITY",
+      "name": "VALECROWN CITY",
       "x": 11,
       "y": 6,
       "width": 1,
@@ -815,7 +815,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_3",
-      "name": "ROUTE 3",
+      "name": "LETHYS DAM",
       "x": 5,
       "y": 4,
       "width": 4,
@@ -823,7 +823,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_4",
-      "name": "ROUTE 4",
+      "name": "ROUTE 3",
       "x": 8,
       "y": 3,
       "width": 6,
@@ -831,7 +831,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_5",
-      "name": "ROUTE 5",
+      "name": "ROUTE 4",
       "x": 14,
       "y": 4,
       "width": 1,
@@ -839,7 +839,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_6",
-      "name": "ROUTE 6",
+      "name": "LETHYS DELTA",
       "x": 14,
       "y": 7,
       "width": 1,
@@ -847,7 +847,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_7",
-      "name": "ROUTE 7",
+      "name": "VALECROWN BEACH",
       "x": 12,
       "y": 6,
       "width": 2,
@@ -1112,7 +1112,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_TOWER",
-      "name": "POKéMON TOWER",
+      "name": "LANTERNCROSS",
       "x": 18,
       "y": 6,
       "width": 1,
@@ -1128,7 +1128,7 @@
     },
     {
       "id": "MAPSEC_POWER_PLANT",
-      "name": "POWER PLANT",
+      "name": "POWER STATION",
       "x": 18,
       "y": 4,
       "width": 1,

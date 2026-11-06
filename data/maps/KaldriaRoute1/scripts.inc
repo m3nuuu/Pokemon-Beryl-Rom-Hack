@@ -55,18 +55,25 @@ KaldriaRoute1_EventScript_Npc3::
 	end
 
 KaldriaRoute1_EventScript_Npc3_Text:
-	.string "Zigzag!$"
+	.string "Nido!$"
 
 KaldriaRoute1_EventScript_Npc4::
 	msgbox KaldriaRoute1_EventScript_Npc4_Text, MSGBOX_NPC
 	end
 
 KaldriaRoute1_EventScript_Npc4_Text:
-	.string "Grrr... woof!$"
+	.string "Jiggly...$"
 
 KaldriaRoute1_EventScript_Npc5::
 	msgbox KaldriaRoute1_EventScript_Npc5_Text, MSGBOX_NPC
 	end
 
 KaldriaRoute1_EventScript_Npc5_Text:
-	.string "Rill!$"
+	.string "...Slow?$"
+
+KaldriaRoute1_EventScript_Npc6::
+	msgbox KaldriaRoute1_EventScript_Npc6_Text, MSGBOX_NPC
+	end
+
+KaldriaRoute1_EventScript_Npc6_Text:
+	.string "Doduo! Doduo!$"

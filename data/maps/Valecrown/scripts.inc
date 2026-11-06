@@ -1,50 +1,35 @@
 Valecrown_MapScripts::
 	.byte 0
 
+Valecrown_EventScript_Sign1::
+	msgbox Valecrown_EventScript_Sign1_Text, MSGBOX_SIGN
+	end
+
+Valecrown_EventScript_Sign1_Text:
+	.string "VALECROWN POKéMON GYM LEADER:\n"
+	.string "CASSIAN The spark of the capital!$"
+
+Valecrown_EventScript_Sign2::
+	msgbox Valecrown_EventScript_Sign2_Text, MSGBOX_SIGN
+	end
+
+Valecrown_EventScript_Sign2_Text:
+	.string "VALECROWN CITY The crown of the\n"
+	.string "valley.$"
+
 Valecrown_EventScript_Sign3::
 	msgbox Valecrown_EventScript_Sign3_Text, MSGBOX_SIGN
 	end
 
 Valecrown_EventScript_Sign3_Text:
-	.string "VALECROWN GYM LEADER: CASSIAN The\n"
-	.string "spark of the capital!$"
+	.string "VALECROWN ZOO Meet the POKéMON of\n"
+	.string "KALDRIA!$"
 
 Valecrown_EventScript_Sign4::
 	msgbox Valecrown_EventScript_Sign4_Text, MSGBOX_SIGN
 	end
 
 Valecrown_EventScript_Sign4_Text:
-	.string "VALECROWN CITY The crown of the\n"
-	.string "valley.$"
-
-Valecrown_EventScript_Sign5::
-	msgbox Valecrown_EventScript_Sign5_Text, MSGBOX_SIGN
-	end
-
-Valecrown_EventScript_Sign5_Text:
-	.string "RADIO TOWER KALDRIA FM: news from\n"
-	.string "the river.$"
-
-Valecrown_EventScript_Sign6::
-	msgbox Valecrown_EventScript_Sign6_Text, MSGBOX_SIGN
-	end
-
-Valecrown_EventScript_Sign6_Text:
-	.string "VALECROWN ZOO Meet the POKéMON of\n"
-	.string "KALDRIA!$"
-
-Valecrown_EventScript_Sign7::
-	msgbox Valecrown_EventScript_Sign7_Text, MSGBOX_SIGN
-	end
-
-Valecrown_EventScript_Sign7_Text:
-	.string "VALECROWN SHOPPING CENTRE$"
-
-Valecrown_EventScript_Sign8::
-	msgbox Valecrown_EventScript_Sign8_Text, MSGBOX_SIGN
-	end
-
-Valecrown_EventScript_Sign8_Text:
 	.string "UNDERPASS To REEDMOUTH$"
 
 Valecrown_EventScript_Npc1::
@@ -77,18 +62,35 @@ Valecrown_EventScript_Npc4::
 	end
 
 Valecrown_EventScript_Npc4_Text:
-	.string "Zig!$"
+	.string "Cubone...$"
 
 Valecrown_EventScript_Npc5::
 	msgbox Valecrown_EventScript_Npc5_Text, MSGBOX_NPC
 	end
 
 Valecrown_EventScript_Npc5_Text:
-	.string "Rill rill!$"
+	.string "Machop!$"
 
 Valecrown_EventScript_Npc6::
 	msgbox Valecrown_EventScript_Npc6_Text, MSGBOX_NPC
 	end
 
 Valecrown_EventScript_Npc6_Text:
-	.string "Grr!$"
+	.string "Nido nido!$"
+
+Valecrown_EventScript_Npc7::
+	msgbox Valecrown_EventScript_Npc7_Text, MSGBOX_NPC
+	end
+
+Valecrown_EventScript_Npc7_Text:
+	.string "Shopping, shopping, shopping! This\n"
+	.string "city has everything.$"
+
+Valecrown_EventScript_Npc8::
+	msgbox Valecrown_EventScript_Npc8_Text, MSGBOX_NPC
+	end
+
+Valecrown_EventScript_Npc8_Text:
+	.string "They keep building and building.\n"
+	.string "Every new tower needs more power\p"
+	.string "from the dam.$"

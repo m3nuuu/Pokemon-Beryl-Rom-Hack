@@ -23,6 +23,7 @@ enum OverworldWeather
     WEATHER_ROUTE123_CYCLE,
     WEATHER_FOG, // Aggregate of WEATHER_FOG_HORIZONTAL and WEATHER_FOG_DIAGONAL
     WEATHER_DYNAMIC,
+    WEATHER_LEAVES, // Pokémon Beryl: drifting leaves and petals
     WEATHER_COUNT,
 };
 

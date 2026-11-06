@@ -987,6 +987,205 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
 #undef tDeltaY2
 
 //------------------------------------------------------------------------------
+// WEATHER_LEAVES (Pokémon Beryl): a few leaves and petals drifting on the wind.
+// Calm towns and routes use it to feel alive; it changes nothing else.
+//------------------------------------------------------------------------------
+
+#define NUM_LEAF_SPRITES 10
+
+static const u8 sWeatherLeavesTiles[] = INCGFX_U8("graphics/weather/leaves.png", ".4bpp");
+static const u16 sWeatherLeavesPalette[] = INCGFX_U16("graphics/weather/leaves.png", ".gbapal");
+
+static void UpdateLeafSprite(struct Sprite *);
+
+static const struct OamData sLeafSpriteOamData =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1,
+};
+
+static const struct SpriteFrameImage sLeafSpriteImages[] =
+{
+    {sWeatherLeavesTiles + 0x00, 0x20},
+    {sWeatherLeavesTiles + 0x20, 0x20},
+    {sWeatherLeavesTiles + 0x40, 0x20},
+    {sWeatherLeavesTiles + 0x60, 0x20},
+    {sWeatherLeavesTiles + 0x80, 0x20},
+    {sWeatherLeavesTiles + 0xA0, 0x20},
+};
+
+static const union AnimCmd sLeafAnimCmd[] =
+{
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(1, 12),
+    ANIMCMD_FRAME(2, 12),
+    ANIMCMD_FRAME(3, 12),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sPetalAnimCmd[] =
+{
+    ANIMCMD_FRAME(4, 18),
+    ANIMCMD_FRAME(5, 18),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sLeafAnimCmds[] =
+{
+    sLeafAnimCmd,
+    sPetalAnimCmd,
+};
+
+static const struct SpriteTemplate sLeafSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = PALTAG_WEATHER_2,
+    .oam = &sLeafSpriteOamData,
+    .anims = sLeafAnimCmds,
+    .images = sLeafSpriteImages,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateLeafSprite,
+};
+
+#define tPosX   data[0]  // position in 1/16 pixels
+#define tPosY   data[1]
+#define tDeltaX data[2]
+#define tDeltaY data[3]
+#define tWave   data[4]
+#define tWaveDelta data[5]
+
+static s16 LeafScreenX(struct Sprite *sprite)
+{
+    s16 x = (sprite->x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
+    if (x & 0x100)
+        x |= -0x100;
+    return x;
+}
+
+static s16 LeafScreenY(struct Sprite *sprite)
+{
+    s16 y = (sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
+    if (y > 200)
+        y -= 256;
+    return y;
+}
+
+// Put a leaf somewhere on screen (anywhere) or just off the top or left edge, where the wind brings it in.
+static void PlaceLeafSprite(struct Sprite *sprite, bool8 anywhere)
+{
+    u16 rand = Random();
+    s16 x, y;
+
+    if (anywhere)
+    {
+        x = Random() % DISPLAY_WIDTH;
+        y = Random() % DISPLAY_HEIGHT;
+    }
+    else if (rand & 1)
+    {
+        x = Random() % DISPLAY_WIDTH;
+        y = -6;
+    }
+    else
+    {
+        x = -6;
+        y = Random() % (DISPLAY_HEIGHT - 40);
+    }
+    sprite->x = x - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+    sprite->y = y - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+    sprite->tPosX = sprite->x * 16;
+    sprite->tPosY = sprite->y * 16;
+    sprite->tDeltaX = 6 + ((rand >> 4) & 7);
+    sprite->tDeltaY = 4 + ((rand >> 8) & 3);
+    sprite->tWave = rand & 0xFF;
+    sprite->tWaveDelta = 1 + ((rand >> 12) & 1);
+    StartSpriteAnim(sprite, ((rand >> 10) & 3) == 0 ? 1 : 0);
+}
+
+static void UpdateLeafSprite(struct Sprite *sprite)
+{
+    s16 x, y;
+
+    sprite->tPosX += sprite->tDeltaX;
+    sprite->tPosY += sprite->tDeltaY;
+    sprite->x = sprite->tPosX >> 4;
+    sprite->y = sprite->tPosY >> 4;
+    sprite->tWave = (sprite->tWave + sprite->tWaveDelta) & 0xFF;
+    sprite->x2 = gSineTable[sprite->tWave] / 48;
+    sprite->y2 = gSineTable[(sprite->tWave + 64) & 0xFF] / 128;
+
+    x = LeafScreenX(sprite);
+    y = LeafScreenY(sprite);
+    if (x > DISPLAY_WIDTH + 8 || y > DISPLAY_HEIGHT + 8 || x < -16 || y < -16)
+        PlaceLeafSprite(sprite, FALSE);
+}
+
+static bool8 CreateLeafSprite(void)
+{
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sLeafSpriteTemplate, 0, 0, 78);
+    if (spriteId == MAX_SPRITES)
+        return FALSE;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+    PlaceLeafSprite(&gSprites[spriteId], TRUE);
+    gWeatherPtr->sprites.s1.snowflakeSprites[gWeatherPtr->snowflakeSpriteCount++] = &gSprites[spriteId];
+    return TRUE;
+}
+
+void Leaves_InitVars(void)
+{
+    gWeatherPtr->initStep = 0;
+    gWeatherPtr->weatherGfxLoaded = FALSE;
+    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->colorMapStepDelay = 20;
+    gWeatherPtr->snowflakeSpriteCount = 0;
+    Weather_SetBlendCoeffs(8, BASE_SHADOW_INTENSITY); // preserve shadow darkness
+    gWeatherPtr->noShadows = FALSE;
+}
+
+void Leaves_Main(void)
+{
+    switch (gWeatherPtr->initStep)
+    {
+    case 0:
+        LoadCustomWeatherSpritePalette(sWeatherLeavesPalette);
+        gWeatherPtr->initStep++;
+        break;
+    case 1:
+        if (gWeatherPtr->snowflakeSpriteCount >= NUM_LEAF_SPRITES || !CreateLeafSprite())
+        {
+            gWeatherPtr->weatherGfxLoaded = TRUE;
+            gWeatherPtr->initStep++;
+        }
+        break;
+    }
+}
+
+void Leaves_InitAll(void)
+{
+    Leaves_InitVars();
+    while (gWeatherPtr->weatherGfxLoaded == FALSE)
+        Leaves_Main();
+}
+
+bool8 Leaves_Finish(void)
+{
+    while (gWeatherPtr->snowflakeSpriteCount)
+        DestroySprite(gWeatherPtr->sprites.s1.snowflakeSprites[--gWeatherPtr->snowflakeSpriteCount]);
+    return FALSE;
+}
+
+#undef tPosX
+#undef tPosY
+#undef tDeltaX
+#undef tDeltaY
+#undef tWave
+#undef tWaveDelta
+
+//------------------------------------------------------------------------------
 // WEATHER_RAIN_THUNDERSTORM
 //------------------------------------------------------------------------------
 
@@ -2687,6 +2886,7 @@ static enum OverworldWeather TranslateWeatherNum(enum OverworldWeather weather)
     case WEATHER_ROUTE119_CYCLE:     return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
     case WEATHER_ROUTE123_CYCLE:     return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
     case WEATHER_DYNAMIC:            return GetDynamicWeather();
+    case WEATHER_LEAVES:             return WEATHER_LEAVES;
     }
 
     return WEATHER_NONE;

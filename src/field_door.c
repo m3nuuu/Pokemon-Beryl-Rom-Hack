@@ -833,6 +833,22 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
         .palettes = sDoorAnimPalettes_OaksLab
     },
     {
+        .metatileNum = METATILE_PalletTown_Door,
+        .tileset = &gTileset_Stillbrook,
+        .sound = DOOR_SOUND_NORMAL,
+        .size = DOOR_SIZE_1x1,
+        .tiles = sDoorAnimTiles_Pallet,
+        .palettes = sDoorAnimPalettes_Pallet
+    },
+    {
+        .metatileNum = METATILE_PalletTown_OaksLabDoor,
+        .tileset = &gTileset_Stillbrook,
+        .sound = DOOR_SOUND_NORMAL,
+        .size = DOOR_SIZE_1x1,
+        .tiles = sDoorAnimTiles_OaksLab,
+        .palettes = sDoorAnimPalettes_OaksLab
+    },
+    {
         .metatileNum = METATILE_ViridianCity_Door,
         .tileset = &gTileset_ViridianCity,
         .sound = DOOR_SOUND_NORMAL,

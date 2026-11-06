@@ -4,9 +4,12 @@ GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
 MAP_VERSION  ?= emerald
 
+# Pokémon Beryl is built on the FireRed side of the engine; `make BUILD=emerald` still builds Emerald.
+BUILD ?= firered
+
 ifeq (firered, $(or $(BUILD), $(MAKECMDGOALS)))
   	GAME_VERSION 	:= FIRERED
-	TITLE       	:= POKEMON FIRE
+	TITLE       	:= POKEMON BERY
 	GAME_CODE   	:= BPRE
 	BUILD_NAME  	:= firered
 	MAP_VERSION 	:= firered

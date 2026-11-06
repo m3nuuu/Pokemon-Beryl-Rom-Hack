@@ -28,7 +28,7 @@ def read_pal(path):
 def load_tileset(name):
     d = tileset_dirs()[name]
     img = Image.open(os.path.join(d, 'tiles.png'))
-    idx = list(img.getdata()) if img.mode == 'P' else None
+    idx = list(img.get_flattened_data() if hasattr(img, "get_flattened_data") else img.getdata()) if img.mode == 'P' else None
     w = img.width
     tiles = []
     for t in range(img.width // 8 * (img.height // 8)):
@@ -40,10 +40,16 @@ def load_tileset(name):
     return tiles, pals, metas
 
 
+def sizes(primary):
+    """Primary tileset size: FRLG primaries hold 640 metatiles and tiles and 7 palettes."""
+    return (640, 640, 7) if primary.endswith('Frlg') else (512, 512, 6)
+
+
 @lru_cache(None)
 def metatile_image(primary, secondary, mid):
     ptiles, ppals, pmetas = load_tileset(primary)
     stiles, spals, smetas = load_tileset(secondary)
+    PRIMARY_METATILES, PRIMARY_TILES, PRIMARY_PALS = sizes(primary)
     pals = ppals[:PRIMARY_PALS] + spals[PRIMARY_PALS:]
     meta = pmetas[mid] if mid < PRIMARY_METATILES else (smetas[mid - PRIMARY_METATILES] if mid - PRIMARY_METATILES < len(smetas) else None)
     im = Image.new('RGBA', (16, 16), (255, 0, 255, 255))

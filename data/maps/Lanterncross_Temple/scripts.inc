@@ -7,6 +7,6 @@ Lanterncross_Temple_EventScript_Npc1::
 
 Lanterncross_Temple_EventScript_Npc1_Text:
 	.string "Welcome to the LANTERNCROSS\n"
-	.string "TEMPLE. The path to the south gate\p"
-	.string "runs through this hall. Please\n"
-	.string "walk quietly.$"
+	.string "TEMPLE. The road from the north\p"
+	.string "gate comes down those stairs.\n"
+	.string "Please walk quietly.$"

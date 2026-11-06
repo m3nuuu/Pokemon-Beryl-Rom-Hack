@@ -2,7 +2,7 @@
 interiors copied from Hoenn templates, and the script text they need."""
 import json, os, textwrap
 import mapgen
-from mapgen import ROOT, MapArt, Project, STAMPS, upper_id, GROUP_OUT, GROUP_IN
+from mapgen import ROOT, MapArt, Project, STAMPS, upper_id, GROUP_OUT, GROUP_IN, STILLBROOK
 
 
 # ---------------------------------------------------------------- text
@@ -35,18 +35,31 @@ class Grid:
         from mapgen import blk
         for x in range(x0, x1 + 1):
             for y, ch in ((y0, 'top'), (y1, 'bot')):
-                m = 0x149
+                m = 0x0E7
                 if x == x0:
-                    m = 0x138 if ch == 'top' else 0x148
+                    m = 0x0EC if ch == 'top' else 0x0FC
                 elif x == x1:
-                    m = 0x13A if ch == 'top' else 0x14A
+                    m = 0x0ED if ch == 'top' else 0x0FD
                 self.over[(x, y)] = blk(m, 1, 0)
         for y in range(y0 + 1, y1):
-            self.over[(x0, y)] = blk(0x140, 1, 0)
-            self.over[(x1, y)] = blk(0x142, 1, 0)
+            self.over[(x0, y)] = blk(0x0F4, 1, 0)
+            self.over[(x1, y)] = blk(0x0F5, 1, 0)
+        gaps = set(gaps)
         for x, y in gaps:
             self.over.pop((x, y), None)
             self.g[y][x] = '.' if self.g[y][x] in 'T' else self.g[y][x]
+        # fence ends either side of a gap
+        for x, y in gaps:
+            for dx, m in ((-1, 0x0ED), (1, 0x0EC)):
+                if (x + dx, y) in self.over and (x + dx, y) not in gaps and y in (y0, y1) and x0 < x + dx < x1:
+                    self.over[(x + dx, y)] = blk(m, 1, 0)
+        return self
+
+    def hfence(self, x0, x1, y):
+        """A straight fence row with rounded ends."""
+        from mapgen import blk
+        for x in range(x0, x1 + 1):
+            self.over[(x, y)] = blk(0x0EC if x == x0 else 0x0ED if x == x1 else 0x0E7, 1, 0)
         return self
 
     def rect(self, x0, y0, x1, y1, ch):
@@ -78,8 +91,8 @@ class Grid:
 class Town:
     """An outdoor map plus everything inside it."""
 
-    def __init__(self, name, grid, secondary='gTileset_Petalburg', music='MUS_LITTLEROOT', mapsec='MAPSEC_LITTLEROOT_TOWN',
-                 map_type='MAP_TYPE_TOWN', weather='WEATHER_SUNNY', show_name=True):
+    def __init__(self, name, grid, secondary=STILLBROOK, music='MUS_RG_PALLET', mapsec='MAPSEC_PALLET_TOWN',
+                 map_type='MAP_TYPE_TOWN', weather='WEATHER_NONE', show_name=True):
         self.name, self.grid = name, grid
         self.id = 'MAP_' + upper_id(name)
         self.secondary, self.music, self.mapsec = secondary, music, mapsec
@@ -137,10 +150,10 @@ class Town:
         lid = proj.add_layout(self.name, art.w, art.h, blocks, art.primary, art.secondary)
         self.layout_id, self.size = lid, (art.w, art.h)
         proj.add_map({
-            'id': self.id, 'name': self.name, 'layout': lid, 'music': self.music, 'region': 'REGION_HOENN',
+            'id': self.id, 'name': self.name, 'layout': lid, 'music': self.music, 'region': 'REGION_KANTO',
             'region_map_section': self.mapsec, 'requires_flash': False, 'weather': self.weather,
             'map_type': self.map_type, 'allow_cycling': True, 'allow_escaping': False, 'allow_running': True,
-            'show_map_name': self.show_name, 'battle_scene': 'MAP_BATTLE_SCENE_NORMAL',
+            'show_map_name': self.show_name, 'floor_number': 0, 'battle_scene': 'MAP_BATTLE_SCENE_NORMAL',
             'connections': self.connections or None, 'object_events': self.objects, 'warp_events': self.warps,
             'coord_events': self.coords, 'bg_events': self.bgs,
         }, GROUP_OUT, self.scripts())
@@ -152,6 +165,33 @@ class Town:
         return head + '\n'.join(self.script_parts)
 
 
+_TYPES = {}
+
+
+def map_types():
+    """Map id -> map type for every map in the repo."""
+    if not _TYPES:
+        d = os.path.join(ROOT, 'data/maps')
+        for n in os.listdir(d):
+            p = os.path.join(d, n, 'map.json')
+            if os.path.exists(p):
+                m = json.load(open(p))
+                _TYPES[m['id']] = m['map_type']
+    return _TYPES
+
+
+def room(town, stamp, x, y, name, template, npcs=(), **kw):
+    """A building on `town` whose inside is a copy of `template`; every exit leads back to the door.
+    npcs: (gfx, x, y, text[, movement]) tuples."""
+    door = town.building(stamp, x, y, name)
+    it = Interior(name, template, {'*': (town.name, door)}, **kw)
+    for n in npcs:
+        gfx, nx, ny, text = n[:4]
+        it.npc(gfx, nx, ny, text, move=n[4] if len(n) > 4 else 'MOVEMENT_TYPE_FACE_DOWN')
+    town.interiors.append(it)
+    return it
+
+
 class Interior(Town):
     """A room copied from a Hoenn map: same layout and warp spots, our own people."""
 
@@ -161,11 +201,16 @@ class Interior(Town):
                          map_type=t['map_type'], weather=t['weather'], show_name=False)
         self.template = t
         self.layout_id = t['layout']
-        # links: template dest map -> (our map name, dest warp id or None to keep)
+        # links: template dest map (or (map, warp id)) -> (our map name, dest warp id or None to keep).
+        # '*' catches every warp that leads outdoors; anything still unmatched is dropped.
         for w in t['warp_events']:
-            dest, wid = links.get((w['dest_map'], str(w['dest_warp_id'])), links.get(w['dest_map'], (None, None)))
-            if dest is None:
-                raise ValueError(f'{name}: no link for warp to {w["dest_map"]}')
+            key = (w['dest_map'], str(w['dest_warp_id']))
+            if key in links or w['dest_map'] in links:
+                dest, wid = links.get(key, links.get(w['dest_map']))
+            elif '*' in links and map_types().get(w['dest_map']) not in ('MAP_TYPE_INDOOR', 'MAP_TYPE_UNDERGROUND'):
+                dest, wid = links['*']
+            else:
+                continue
             self.warps.append({**w, 'dest_map': 'MAP_' + upper_id(dest) if not dest.startswith('MAP_') else dest,
                                'dest_warp_id': str(w['dest_warp_id'] if wid is None else wid)})
         if keep_bgs:
@@ -174,10 +219,10 @@ class Interior(Town):
     def add_to(self, proj):
         t = self.template
         proj.add_map({
-            'id': self.id, 'name': self.name, 'layout': self.layout_id, 'music': self.music, 'region': 'REGION_HOENN',
+            'id': self.id, 'name': self.name, 'layout': self.layout_id, 'music': self.music, 'region': t['region'],
             'region_map_section': self.mapsec, 'requires_flash': False, 'weather': self.weather,
             'map_type': self.map_type, 'allow_cycling': False, 'allow_escaping': False, 'allow_running': False,
-            'show_map_name': False, 'battle_scene': 'MAP_BATTLE_SCENE_NORMAL', 'connections': None,
+            'show_map_name': False, 'floor_number': t.get('floor_number', 0), 'battle_scene': 'MAP_BATTLE_SCENE_NORMAL', 'connections': None,
             'object_events': self.objects, 'warp_events': self.warps, 'coord_events': self.coords, 'bg_events': self.bgs,
         }, GROUP_IN, self.scripts())
 
@@ -186,20 +231,20 @@ def pokecenter(town, x, y, heal_id, proj_heals):
     """A Pokémon Center building, its inside, nurse and heal location."""
     inside = f'{town.name}_PokemonCenter_1F'
     door = town.building('pokecenter', x, y, inside)
-    it = Interior(inside, 'PetalburgCity_PokemonCenter_1F',
-                  {'MAP_PETALBURG_CITY': (town.name, door), 'MAP_PETALBURG_CITY_POKEMON_CENTER_2F': (town.name, door)})
-    # stairs to the 2F have nowhere to go yet; send them out of the door
-    it.warps = it.warps[:2]
+    it = Interior(inside, 'ViridianCity_PokemonCenter_1F_Frlg',
+                  {'MAP_VIRIDIAN_CITY': (town.name, door), 'MAP_VIRIDIAN_CITY_POKEMON_CENTER_2F': (town.name, door)})
+    # the stairs to the 2F have nowhere to go yet
+    it.warps = [w for w in it.warps if w['y'] == 8]
     local = f'LOCALID_{upper_id(town.name)}_NURSE'
     it.map_scripts.append(('MAP_SCRIPT_ON_TRANSITION', f'{inside}_OnTransition'))
     it.map_scripts.append(('MAP_SCRIPT_ON_RESUME', 'CableClub_OnResume'))
     it.script_parts.append(f'{inside}_OnTransition:\n\tsetrespawn {heal_id}\n\tend\n\n'
-                           f'{inside}_EventScript_Nurse::\n\tsetvar VAR_0x800B, {local}\n\tcall Common_EventScript_PkmnCenterNurse\n'
-                           f'\twaitmessage\n\twaitbuttonpress\n\trelease\n\tend\n')
-    it.npc('OBJ_EVENT_GFX_NURSE', 7, 2, script=f'{inside}_EventScript_Nurse', local=local)
+                           f'{inside}_EventScript_Nurse::\n\tlock\n\tfaceplayer\n\tcall EventScript_PkmnCenterNurse_Frlg\n'
+                           f'\trelease\n\tend\n')
+    it.npc('OBJ_EVENT_GFX_NURSE_FRLG', 7, 2, script=f'{inside}_EventScript_Nurse', local=local)
     town.interiors.append(it)
     st = STAMPS['pokecenter']
-    town.sign(x + st.door[0] + 1, y + st.door[1], script='Common_EventScript_ShowPokemonCenterSign')
+    # the P.C sign on the front works by itself (metatile behaviour)
     proj_heals.append({'id': heal_id, 'map': town.id, 'x': x + st.door[0], 'y': y + st.door[1] + 1,
                        'respawn_map': it.id, 'respawn_npc': local})
     return it
@@ -208,13 +253,11 @@ def pokecenter(town, x, y, heal_id, proj_heals):
 def mart(town, x, y, items):
     inside = f'{town.name}_Mart'
     door = town.building('mart', x, y, inside)
-    it = Interior(inside, 'PetalburgCity_Mart', {'MAP_PETALBURG_CITY': (town.name, door)})
+    it = Interior(inside, 'ViridianCity_Mart_Frlg', {'MAP_VIRIDIAN_CITY': (town.name, door)})
     lab = f'{inside}_EventScript_Clerk'
     it.script_parts.append(f'{lab}::\n\tlock\n\tfaceplayer\n\tmessage gText_HowMayIServeYou\n\twaitmessage\n'
                            f'\tpokemart {inside}_Items\n\tmsgbox gText_PleaseComeAgain, MSGBOX_DEFAULT\n\trelease\n\tend\n\n'
                            f'\t.align 2\n{inside}_Items:\n' + ''.join(f'\t.2byte {i}\n' for i in items) + '\tpokemartlistend\n')
-    it.npc('OBJ_EVENT_GFX_MART_EMPLOYEE', 1, 3, script=lab, move='MOVEMENT_TYPE_FACE_RIGHT')
+    it.npc('OBJ_EVENT_GFX_CLERK', 2, 3, script=lab, move='MOVEMENT_TYPE_FACE_RIGHT')
     town.interiors.append(it)
-    st = STAMPS['mart']
-    town.sign(x + st.door[0] + 1, y + st.door[1], script='Common_EventScript_ShowPokemartSign')
     return it

@@ -1,10 +1,10 @@
 {
   "id": "MAP_VALECROWN_HOUSE1",
   "name": "Valecrown_House1",
-  "layout": "LAYOUT_HOUSE1",
-  "music": "MUS_PETALBURG",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_PETALBURG_CITY",
+  "layout": "LAYOUT_HOUSE5_FRLG",
+  "music": "MUS_RG_CELADON",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -12,15 +12,16 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2_FRLG",
       "x": 4,
       "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -32,17 +33,24 @@
   "warp_events": [
     {
       "x": 3,
-      "y": 8,
-      "elevation": 0,
+      "y": 7,
+      "elevation": 3,
       "dest_map": "MAP_VALECROWN",
-      "dest_warp_id": "9"
+      "dest_warp_id": "10"
     },
     {
       "x": 4,
-      "y": 8,
-      "elevation": 0,
+      "y": 7,
+      "elevation": 3,
       "dest_map": "MAP_VALECROWN",
-      "dest_warp_id": "9"
+      "dest_warp_id": "10"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_VALECROWN",
+      "dest_warp_id": "10"
     }
   ],
   "coord_events": [],

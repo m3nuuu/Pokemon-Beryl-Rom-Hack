@@ -1,10 +1,10 @@
 {
   "id": "MAP_REEDMOUTH_HARBOUR",
   "name": "Reedmouth_Harbour",
-  "layout": "LAYOUT_HOUSE1",
-  "music": "MUS_PETALBURG",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_PETALBURG_CITY",
+  "layout": "LAYOUT_VERMILION_CITY_POKEMON_FAN_CLUB",
+  "music": "MUS_RG_VERMILLION",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_VERMILION_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -12,12 +12,13 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 4,
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR_FRLG",
+      "x": 5,
       "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -31,16 +32,23 @@
   ],
   "warp_events": [
     {
-      "x": 3,
-      "y": 8,
-      "elevation": 0,
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
       "dest_map": "MAP_REEDMOUTH",
       "dest_warp_id": "5"
     },
     {
-      "x": 4,
-      "y": 8,
-      "elevation": 0,
+      "x": 5,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_REEDMOUTH",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 3,
       "dest_map": "MAP_REEDMOUTH",
       "dest_warp_id": "5"
     }

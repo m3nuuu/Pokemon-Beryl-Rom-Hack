@@ -869,6 +869,18 @@ const struct Tileset gTileset_PalletTown =
     .callback = NULL,
 };
 
+// Pallet Town's buildings on ordinary grass: Stillbrook and Route 1
+const struct Tileset gTileset_Stillbrook =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Stillbrook,
+    .palettes = gTilesetPalettes_Stillbrook,
+    .metatiles = gMetatiles_Stillbrook,
+    .metatileAttributes = gMetatileAttributes_Stillbrook,
+    .callback = NULL,
+};
+
 const struct Tileset gTileset_ViridianCity =
 {
     .isCompressed = TRUE,

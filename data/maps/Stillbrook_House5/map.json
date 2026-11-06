@@ -1,10 +1,10 @@
 {
-  "id": "MAP_STILLBROOK_JASPERS_HOUSE_1F",
-  "name": "Stillbrook_JaspersHouse_1F",
-  "layout": "LAYOUT_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
-  "music": "MUS_LITTLEROOT",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "id": "MAP_STILLBROOK_HOUSE5",
+  "name": "Stillbrook_House5",
+  "layout": "LAYOUT_PALLET_TOWN_RIVALS_HOUSE",
+  "music": "MUS_RG_PALLET",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_PALLET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -12,44 +12,45 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
-      "x": 8,
-      "y": 6,
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN_FRLG",
+      "x": 6,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Stillbrook_JaspersHouse_1F_EventScript_Npc1",
+      "script": "Stillbrook_House5_EventScript_Npc1",
       "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 1,
+      "x": 4,
       "y": 8,
-      "elevation": 0,
+      "elevation": 3,
       "dest_map": "MAP_STILLBROOK",
-      "dest_warp_id": "4"
+      "dest_warp_id": "9"
     },
     {
-      "x": 2,
+      "x": 5,
       "y": 8,
-      "elevation": 0,
+      "elevation": 3,
       "dest_map": "MAP_STILLBROOK",
-      "dest_warp_id": "4"
+      "dest_warp_id": "9"
     },
     {
-      "x": 2,
-      "y": 2,
-      "elevation": 0,
-      "dest_map": "MAP_STILLBROOK_JASPERS_HOUSE_2F",
-      "dest_warp_id": "0"
+      "x": 3,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_STILLBROOK",
+      "dest_warp_id": "9"
     }
   ],
   "coord_events": [],

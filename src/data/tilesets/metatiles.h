@@ -223,6 +223,8 @@ const u16 gMetatileAttributes_General_Frlg[] = INCBIN_U16("data/tilesets/primary
 
 const u16 gMetatiles_PalletTown[] = INCBIN_U16("data/tilesets/secondary/pallet_town_frlg/metatiles.bin");
 const u16 gMetatileAttributes_PalletTown[] = INCBIN_U16("data/tilesets/secondary/pallet_town_frlg/metatile_attributes.bin");
+const u16 gMetatiles_Stillbrook[] = INCBIN_U16("data/tilesets/secondary/stillbrook/metatiles.bin");
+const u16 gMetatileAttributes_Stillbrook[] = INCBIN_U16("data/tilesets/secondary/stillbrook/metatile_attributes.bin");
 
 const u16 gMetatiles_ViridianCity[] = INCBIN_U16("data/tilesets/secondary/viridian_city_frlg/metatiles.bin");
 const u16 gMetatileAttributes_ViridianCity[] = INCBIN_U16("data/tilesets/secondary/viridian_city_frlg/metatile_attributes.bin");

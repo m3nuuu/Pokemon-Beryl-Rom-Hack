@@ -1,27 +1,27 @@
 Reedmouth_MapScripts::
 	.byte 0
 
+Reedmouth_EventScript_Sign1::
+	msgbox Reedmouth_EventScript_Sign1_Text, MSGBOX_SIGN
+	end
+
+Reedmouth_EventScript_Sign1_Text:
+	.string "REEDMOUTH POKéMON GYM LEADER:\n"
+	.string "SEDGE Rooted in the delta!$"
+
+Reedmouth_EventScript_Sign2::
+	msgbox Reedmouth_EventScript_Sign2_Text, MSGBOX_SIGN
+	end
+
+Reedmouth_EventScript_Sign2_Text:
+	.string "UNDERPASS Under the LETHYS to\n"
+	.string "VALECROWN CITY$"
+
 Reedmouth_EventScript_Sign3::
 	msgbox Reedmouth_EventScript_Sign3_Text, MSGBOX_SIGN
 	end
 
 Reedmouth_EventScript_Sign3_Text:
-	.string "REEDMOUTH GYM LEADER: SEDGE Rooted\n"
-	.string "in the delta!$"
-
-Reedmouth_EventScript_Sign4::
-	msgbox Reedmouth_EventScript_Sign4_Text, MSGBOX_SIGN
-	end
-
-Reedmouth_EventScript_Sign4_Text:
-	.string "UNDERPASS Under the LETHYS to\n"
-	.string "VALECROWN CITY$"
-
-Reedmouth_EventScript_Sign5::
-	msgbox Reedmouth_EventScript_Sign5_Text, MSGBOX_SIGN
-	end
-
-Reedmouth_EventScript_Sign5_Text:
 	.string "REEDMOUTH The river ends, the sea\n"
 	.string "begins.$"
 
@@ -50,3 +50,10 @@ Reedmouth_EventScript_Npc3::
 Reedmouth_EventScript_Npc3_Text:
 	.string "SEDGE says the reeds clean the\n"
 	.string "river before it reaches the sea.$"
+
+Reedmouth_EventScript_Npc4::
+	msgbox Reedmouth_EventScript_Npc4_Text, MSGBOX_NPC
+	end
+
+Reedmouth_EventScript_Npc4_Text:
+	.string "Seel!$"

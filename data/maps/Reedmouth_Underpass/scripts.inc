@@ -7,5 +7,5 @@ Reedmouth_Underpass_EventScript_Npc1::
 
 Reedmouth_Underpass_EventScript_Npc1_Text:
 	.string "The underpass runs right under the\n"
-	.string "LETHYS. Left: REEDMOUTH. Right:\p"
+	.string "LETHYS. Down the stairs for\p"
 	.string "VALECROWN CITY.$"

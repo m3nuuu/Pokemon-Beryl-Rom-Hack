@@ -361,7 +361,7 @@
     {
       "id": "HEAL_LOCATION_REEDMOUTH",
       "map": "MAP_REEDMOUTH",
-      "x": 5,
+      "x": 6,
       "y": 8,
       "respawn_map": "MAP_REEDMOUTH_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_REEDMOUTH_NURSE"
@@ -369,7 +369,7 @@
     {
       "id": "HEAL_LOCATION_VALECROWN",
       "map": "MAP_VALECROWN",
-      "x": 11,
+      "x": 12,
       "y": 10,
       "respawn_map": "MAP_VALECROWN_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_VALECROWN_NURSE"

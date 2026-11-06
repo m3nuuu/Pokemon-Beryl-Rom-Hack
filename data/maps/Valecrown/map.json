@@ -2,16 +2,17 @@
   "id": "MAP_VALECROWN",
   "name": "Valecrown",
   "layout": "LAYOUT_VALECROWN",
-  "music": "MUS_LILYCOVE",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_MAUVILLE_CITY",
+  "music": "MUS_RG_CELADON",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
-  "weather": "WEATHER_SUNNY",
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_CITY",
   "allow_cycling": true,
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -47,7 +48,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN_FRLG",
       "x": 30,
       "y": 12,
       "elevation": 3,
@@ -60,7 +61,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_FRLG",
       "x": 44,
       "y": 28,
       "elevation": 3,
@@ -86,7 +87,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ZIGZAGOON_1",
+      "graphics_id": "OBJ_EVENT_GFX_CUBONE",
       "x": 52,
       "y": 33,
       "elevation": 3,
@@ -99,7 +100,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_AZUMARILL",
+      "graphics_id": "OBJ_EVENT_GFX_MACHOP",
       "x": 62,
       "y": 36,
       "elevation": 3,
@@ -112,7 +113,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_POOCHYENA",
+      "graphics_id": "OBJ_EVENT_GFX_NIDORAN_M",
       "x": 56,
       "y": 31,
       "elevation": 3,
@@ -122,6 +123,32 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Valecrown_EventScript_Npc6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY_FRLG",
+      "x": 40,
+      "y": 44,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 3,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Valecrown_EventScript_Npc7",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "x": 26,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 3,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Valecrown_EventScript_Npc8",
       "flag": "0"
     }
   ],
@@ -134,21 +161,28 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 11,
+      "x": 12,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_POKEMON_CENTER_1F",
       "dest_warp_id": "0"
     },
     {
-      "x": 37,
+      "x": 38,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_MART",
       "dest_warp_id": "0"
     },
     {
-      "x": 51,
+      "x": 9,
+      "y": 40,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN_UNDERPASS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 52,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_SHOPPING_CENTRE",
@@ -162,6 +196,13 @@
       "dest_warp_id": "0"
     },
     {
+      "x": 44,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN_PRIZE_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
       "x": 23,
       "y": 9,
       "elevation": 0,
@@ -170,7 +211,7 @@
     },
     {
       "x": 51,
-      "y": 24,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_BIKE_SHOP",
       "dest_warp_id": "0"
@@ -183,50 +224,43 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 9,
-      "y": 40,
-      "elevation": 0,
-      "dest_map": "MAP_REEDMOUTH_UNDERPASS",
-      "dest_warp_id": "2"
-    },
-    {
       "x": 11,
-      "y": 24,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE1",
       "dest_warp_id": "0"
     },
     {
       "x": 23,
-      "y": 40,
+      "y": 41,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE2",
       "dest_warp_id": "0"
     },
     {
       "x": 63,
-      "y": 24,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE3",
       "dest_warp_id": "0"
     },
     {
       "x": 25,
-      "y": 24,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE4",
       "dest_warp_id": "0"
     },
     {
       "x": 37,
-      "y": 24,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE5",
       "dest_warp_id": "0"
     },
     {
       "x": 63,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE6",
       "dest_warp_id": "0"
@@ -236,27 +270,11 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 12,
-      "y": 9,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Common_EventScript_ShowPokemonCenterSign"
-    },
-    {
-      "type": "sign",
-      "x": 38,
-      "y": 9,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Common_EventScript_ShowPokemartSign"
-    },
-    {
-      "type": "sign",
-      "x": 28,
+      "x": 29,
       "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Valecrown_EventScript_Sign3"
+      "script": "Valecrown_EventScript_Sign1"
     },
     {
       "type": "sign",
@@ -264,15 +282,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Valecrown_EventScript_Sign4"
-    },
-    {
-      "type": "sign",
-      "x": 28,
-      "y": 9,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Valecrown_EventScript_Sign5"
+      "script": "Valecrown_EventScript_Sign2"
     },
     {
       "type": "sign",
@@ -280,23 +290,15 @@
       "y": 27,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Valecrown_EventScript_Sign6"
-    },
-    {
-      "type": "sign",
-      "x": 54,
-      "y": 9,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Valecrown_EventScript_Sign7"
+      "script": "Valecrown_EventScript_Sign3"
     },
     {
       "type": "sign",
       "x": 12,
-      "y": 40,
+      "y": 41,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Valecrown_EventScript_Sign8"
+      "script": "Valecrown_EventScript_Sign4"
     }
   ]
 }

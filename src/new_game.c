@@ -135,10 +135,8 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    if (IS_FRLG)
-        SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
-    else
-        SetWarpDestination(MAP_GROUP(MAP_STILLBROOK_BERYLS_HOUSE_2F), MAP_NUM(MAP_STILLBROOK_BERYLS_HOUSE_2F), WARP_ID_NONE, 4, 3);
+    // Pokémon Beryl: every new game starts in Beryl's room in Stillbrook
+    SetWarpDestination(MAP_GROUP(MAP_STILLBROOK_BERYLS_HOUSE_2F), MAP_NUM(MAP_STILLBROOK_BERYLS_HOUSE_2F), WARP_ID_NONE, 6, 6);
     WarpIntoMap();
 }
 

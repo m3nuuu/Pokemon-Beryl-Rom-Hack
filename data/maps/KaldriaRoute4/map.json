@@ -2,16 +2,17 @@
   "id": "MAP_KALDRIA_ROUTE4",
   "name": "KaldriaRoute4",
   "layout": "LAYOUT_KALDRIA_ROUTE4",
-  "music": "MUS_ROUTE110",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_ROUTE_105",
+  "music": "MUS_RG_ROUTE24",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_ROUTE_5",
   "requires_flash": false,
-  "weather": "WEATHER_SUNNY",
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
   "allow_cycling": true,
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -34,7 +35,7 @@
   "warp_events": [
     {
       "x": 17,
-      "y": 12,
+      "y": 11,
       "elevation": 0,
       "dest_map": "MAP_KALDRIA_ROUTE4_POWER_STATION",
       "dest_warp_id": "0"

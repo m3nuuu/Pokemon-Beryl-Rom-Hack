@@ -1,10 +1,10 @@
 {
   "id": "MAP_STILLBROOK_BERYLS_HOUSE_2F",
   "name": "Stillbrook_BerylsHouse_2F",
-  "layout": "LAYOUT_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
-  "music": "MUS_LITTLEROOT",
-  "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "layout": "LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_2F_FRLG",
+  "music": "MUS_RG_PALLET",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_PALLET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -12,14 +12,15 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [],
   "warp_events": [
     {
-      "x": 7,
-      "y": 1,
-      "elevation": 0,
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
       "dest_map": "MAP_STILLBROOK_BERYLS_HOUSE_1F",
       "dest_warp_id": "2"
     }
@@ -28,11 +29,11 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 0,
-      "y": 1,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_PC"
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PalletTown_PlayersHouse_2F_EventScript_NES"
     },
     {
       "type": "sign",
@@ -40,23 +41,15 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PlayersHouse_2F_EventScript_Notebook"
+      "script": "EventScript_PalletTown_PlayersHouse_2F_TurnOnPC"
     },
     {
       "type": "sign",
-      "x": 5,
+      "x": 11,
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_WallClock"
-    },
-    {
-      "type": "sign",
-      "x": 3,
-      "y": 1,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PlayersHouse_2F_EventScript_GameCube"
+      "script": "PalletTown_PlayersHouse_2F_EventScript_Sign"
     }
   ]
 }

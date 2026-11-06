@@ -4,6 +4,12 @@ Built from Manuel's drawing (Nov 2026). One tile = 16 px in game. World coordina
 x to the east, y to the south. Maps that share an edge are connected seamlessly; the generator
 (`tools/beryl/world.py`) works the connections out from these positions.
 
+Everything is built on the FireRed/LeafGreen (Kanto) tilesets and is part of the FireRed build
+(`make`, which now defaults to `BUILD=firered`; the ROM is `pokefirered.gba`). Each town uses one
+Kanto tileset for its buildings: Stillbrook and Route 1 use Pallet Town's (recoloured onto normal
+grass as `gTileset_Stillbrook`), Lanterncross and Route 4 Lavender Town's, Reedmouth and the coast
+Vermilion City's, Valecrown Celadon City's. Pokémon Centers, marts, gyms and gate houses work anywhere.
+
 Distances are stretched where Manuel asked: the capital sits further from the Lowbank Ruins and
 the power station than in the drawing.
 
@@ -38,12 +44,18 @@ the power station than in the drawing.
 - Cragway Cave: Stillbrook (north) to Cragmoor (south). "Another Cave" in the drawing; the name is a placeholder.
 - Emberdeep Cave: Route 9 to Victory Road.
 - The Mine: north of Cragmoor.
-- Lanterncross Temple: the road from Route 3 to Reedmouth passes through it. The Ghost gym (Oda) is inside, since Lanterncross is no longer a town.
+- Lanterncross Temple: built into the hillside. The road from Route 3 enters the north gate onto the temple's upper hall (the Ghost gym, Oda), goes down the stairs to the main hall and out of the front doors, then over the bridge to Reedmouth.
 - Power Station: Route 4.
 - Lethys Dam interior and the maintenance tunnel: under the dam crest.
 - Underpass: Reedmouth to Valecrown under the river.
 
-## Hoenn data reused
+## Kanto data reused
 
-Place names reuse Hoenn map sections (renamed): Stillbrook = MAPSEC_LITTLEROOT_TOWN, and so on.
-The region map picture is still Hoenn's until a Kaldria one is drawn.
+Place names reuse Kanto map sections (renamed): Stillbrook = MAPSEC_PALLET_TOWN, and so on.
+Interiors are copies of Kanto rooms (Red's house for Beryl's, the Pokémon Tower for the temple).
+The region map picture is still Kanto's until a Kaldria one is drawn.
+
+## Ambience
+
+`WEATHER_LEAVES` is a new weather: a few leaves and petals drifting on the wind (graphics/weather/leaves.png).
+Stillbrook and Route 1 use it.
