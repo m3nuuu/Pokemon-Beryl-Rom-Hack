@@ -38,23 +38,14 @@ Stillbrook_EventScript_Sign5::
 	end
 
 Stillbrook_EventScript_Sign5_Text:
-	.string "CRAGWAY CAVE Ahead: CRAGMOOR$"
+	.string "CRAGWAY CAVE$"
 
 Stillbrook_EventScript_Sign6::
 	msgbox Stillbrook_EventScript_Sign6_Text, MSGBOX_SIGN
 	end
 
 Stillbrook_EventScript_Sign6_Text:
-	.string "STILLBROOK LIBRARY Open every day.\n"
-	.string "Please be quiet!$"
-
-Stillbrook_EventScript_Sign7::
-	msgbox Stillbrook_EventScript_Sign7_Text, MSGBOX_SIGN
-	end
-
-Stillbrook_EventScript_Sign7_Text:
-	.string "Please do not feed the POKéMON in\n"
-	.string "the pond.$"
+	.string "ROUTE 2 Up to the LETHYS DAM$"
 
 Stillbrook_EventScript_Npc1::
 	msgbox Stillbrook_EventScript_Npc1_Text, MSGBOX_NPC
@@ -146,10 +137,3 @@ Stillbrook_EventScript_Npc11::
 
 Stillbrook_EventScript_Npc11_Text:
 	.string "Psy...?$"
-
-Stillbrook_EventScript_Npc12::
-	msgbox Stillbrook_EventScript_Npc12_Text, MSGBOX_NPC
-	end
-
-Stillbrook_EventScript_Npc12_Text:
-	.string "Clefairy!$"

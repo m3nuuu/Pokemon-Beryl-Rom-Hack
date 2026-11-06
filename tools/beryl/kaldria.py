@@ -245,7 +245,8 @@ def pokecenter(town, x, y, heal_id, proj_heals):
     town.interiors.append(it)
     st = STAMPS['pokecenter']
     # the P.C sign on the front works by itself (metatile behaviour)
-    proj_heals.append({'id': heal_id, 'map': town.id, 'x': x + st.door[0], 'y': y + st.door[1] + 1,
+    dw = town.warps[door]
+    proj_heals.append({'id': heal_id, 'map': town.id, 'x': dw['x'], 'y': dw['y'] + 1,
                        'respawn_map': it.id, 'respawn_npc': local})
     return it
 

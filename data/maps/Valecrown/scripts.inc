@@ -32,6 +32,13 @@ Valecrown_EventScript_Sign4::
 Valecrown_EventScript_Sign4_Text:
 	.string "UNDERPASS To REEDMOUTH$"
 
+Valecrown_EventScript_Sign5::
+	msgbox Valecrown_EventScript_Sign5_Text, MSGBOX_SIGN
+	end
+
+Valecrown_EventScript_Sign5_Text:
+	.string "RADIO TOWER$"
+
 Valecrown_EventScript_Npc1::
 	msgbox Valecrown_EventScript_Npc1_Text, MSGBOX_NPC
 	end

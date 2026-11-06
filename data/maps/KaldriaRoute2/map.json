@@ -17,16 +17,21 @@
   "connections": [
     {
       "map": "MAP_STILLBROOK",
-      "offset": 16,
+      "offset": 10,
       "direction": "left"
     },
     {
       "map": "MAP_LETHYS_DAM",
-      "offset": 10,
+      "offset": -14,
       "direction": "right"
     },
     {
       "map": "MAP_KALDRIA_ROUTE3",
+      "offset": 18,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_LANTERNCROSS",
       "offset": 0,
       "direction": "down"
     }
@@ -34,8 +39,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER_FRLG",
-      "x": 16,
-      "y": 18,
+      "x": 12,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -44,6 +49,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "KaldriaRoute2_EventScript_Npc1",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER_FRLG",
+      "x": 22,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KaldriaRoute2_EventScript_Npc2",
+      "flag": "0"
     }
   ],
   "warp_events": [],
@@ -51,8 +69,8 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 12,
-      "y": 27,
+      "x": 6,
+      "y": 25,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "KaldriaRoute2_EventScript_Sign1"

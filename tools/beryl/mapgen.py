@@ -222,6 +222,7 @@ class MapArt:
         self.stamps = list(stamps)  # (stampname, x, y, warp dest or None)
         self.over = {}
         self.doors = []
+        self.check_secondary = True
 
     def c(self, x, y):
         if 0 <= x < self.w and 0 <= y < self.h:
@@ -275,8 +276,8 @@ class MapArt:
         # autotiled classes
         for cls, ch, coll, elev, fb in (('pond', '~', 0, 1, 0x1A4), ('sea', '≈', 0, 1, 0x1D9), ('path', '=', 0, 3, 0x0DC),
                                         ('dirt', ':', 0, 3, 0x0D9), ('rock', '^', 1, 0, 0x071), ('pave', 'p', 0, 3, 0x16E), ('road', 'R', 0, 3, 0x16E)):
-            get = lambda x, y, ch=ch: self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) in (ch, 'C', 'S', 'W') if ch == '^' else \
-                self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) == ch
+            members = {'^': ('^', 'C', 'S', 'W'), '~': ('~', '≈'), '≈': ('~', '≈')}.get(ch, (ch,))
+            get = lambda x, y, members=members: self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) in members
             for y in range(h):
                 for x in range(w):
                     if self.chars[y][x] == ch:
@@ -307,7 +308,7 @@ class MapArt:
         # buildings
         for i, (sname, sx, sy, dest) in enumerate(self.stamps):
             st = STAMPS[sname]
-            if st.secondary and st.secondary != SAME_TILES.get(self.secondary, self.secondary):
+            if self.check_secondary and st.secondary and st.secondary != SAME_TILES.get(self.secondary, self.secondary):
                 raise ValueError(f'{self.name}: stamp {sname} needs {st.secondary}, map uses {self.secondary}')
             for j, row in enumerate(st.blocks()):
                 for k, v in enumerate(row):

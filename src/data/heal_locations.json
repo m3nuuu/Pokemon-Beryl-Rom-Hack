@@ -353,24 +353,24 @@
     {
       "id": "HEAL_LOCATION_STILLBROOK",
       "map": "MAP_STILLBROOK",
-      "x": 17,
-      "y": 12,
+      "x": 20,
+      "y": 20,
       "respawn_map": "MAP_STILLBROOK_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_STILLBROOK_NURSE"
     },
     {
       "id": "HEAL_LOCATION_REEDMOUTH",
       "map": "MAP_REEDMOUTH",
-      "x": 6,
-      "y": 8,
+      "x": 16,
+      "y": 9,
       "respawn_map": "MAP_REEDMOUTH_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_REEDMOUTH_NURSE"
     },
     {
       "id": "HEAL_LOCATION_VALECROWN",
       "map": "MAP_VALECROWN",
-      "x": 12,
-      "y": 10,
+      "x": 23,
+      "y": 23,
       "respawn_map": "MAP_VALECROWN_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_VALECROWN_NURSE"
     }

@@ -69,11 +69,4 @@ KaldriaRoute1_EventScript_Npc5::
 	end
 
 KaldriaRoute1_EventScript_Npc5_Text:
-	.string "...Slow?$"
-
-KaldriaRoute1_EventScript_Npc6::
-	msgbox KaldriaRoute1_EventScript_Npc6_Text, MSGBOX_NPC
-	end
-
-KaldriaRoute1_EventScript_Npc6_Text:
 	.string "Doduo! Doduo!$"
