@@ -18,6 +18,26 @@
       "map": "MAP_STILLBROOK",
       "offset": 0,
       "direction": "up"
+    },
+    {
+      "map": "MAP_KALDRIA_ROUTE3",
+      "offset": -30,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_LANTERNCROSS",
+      "offset": 6,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_REEDMOUTH",
+      "offset": 26,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_LETHYS_DELTA",
+      "offset": 62,
+      "direction": "right"
     }
   ],
   "object_events": [

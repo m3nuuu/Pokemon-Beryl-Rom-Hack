@@ -1,0 +1,36 @@
+{
+  "id": "MAP_VALECROWN_BIKE_SHOP",
+  "name": "Valecrown_BikeShop",
+  "layout": "LAYOUT_MAUVILLE_CITY_BIKE_SHOP",
+  "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_MAUVILLE_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN",
+      "dest_warp_id": "6"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

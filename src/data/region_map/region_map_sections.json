@@ -66,7 +66,7 @@
     },
     {
       "id": "MAPSEC_SLATEPORT_CITY",
-      "name": "SLATEPORT CITY",
+      "name": "REEDMOUTH",
       "x": 8,
       "y": 10,
       "width": 1,
@@ -74,7 +74,7 @@
     },
     {
       "id": "MAPSEC_MAUVILLE_CITY",
-      "name": "MAUVILLE CITY",
+      "name": "VALECROWN CITY",
       "x": 8,
       "y": 6,
       "width": 2,
@@ -138,7 +138,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_102",
-      "name": "ROUTE 102",
+      "name": "ROUTE 2",
       "x": 2,
       "y": 9,
       "width": 2,
@@ -146,7 +146,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_103",
-      "name": "ROUTE 103",
+      "name": "LETHYS DAM",
       "x": 4,
       "y": 8,
       "width": 4,
@@ -154,7 +154,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_104",
-      "name": "ROUTE 104",
+      "name": "ROUTE 3",
       "x": 0,
       "y": 7,
       "width": 1,
@@ -162,7 +162,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_105",
-      "name": "ROUTE 105",
+      "name": "ROUTE 4",
       "x": 0,
       "y": 10,
       "width": 1,
@@ -170,7 +170,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_106",
-      "name": "ROUTE 106",
+      "name": "LANTERNCROSS",
       "x": 0,
       "y": 13,
       "width": 2,
@@ -178,7 +178,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_107",
-      "name": "ROUTE 107",
+      "name": "LETHYS DELTA",
       "x": 3,
       "y": 14,
       "width": 3,
@@ -186,7 +186,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_108",
-      "name": "ROUTE 108",
+      "name": "VALECROWN BEACH",
       "x": 6,
       "y": 14,
       "width": 2,

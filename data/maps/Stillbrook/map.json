@@ -18,6 +18,16 @@
       "map": "MAP_KALDRIA_ROUTE1",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_KALDRIA_ROUTE2",
+      "offset": -16,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_KALDRIA_ROUTE3",
+      "offset": 14,
+      "direction": "right"
     }
   ],
   "object_events": [

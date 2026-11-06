@@ -1165,7 +1165,16 @@
   ],
   "gMapGroup_KaldriaOutdoor": [
     "Stillbrook",
-    "KaldriaRoute1"
+    "KaldriaRoute1",
+    "KaldriaRoute2",
+    "LethysDam",
+    "KaldriaRoute3",
+    "KaldriaRoute4",
+    "Lanterncross",
+    "Reedmouth",
+    "Valecrown",
+    "LethysDelta",
+    "ValecrownBeach"
   ],
   "gMapGroup_KaldriaIndoor": [
     "Stillbrook_PokemonCenter_1F",
@@ -1179,6 +1188,30 @@
     "KaldriaRoute1_Pension",
     "KaldriaRoute1_FarmHouse",
     "KaldriaRoute1_House",
-    "KaldriaRoute1_Windmill"
+    "KaldriaRoute1_Windmill",
+    "KaldriaRoute4_PowerStation",
+    "Lanterncross_Temple",
+    "Lanterncross_Temple2F",
+    "Reedmouth_PokemonCenter_1F",
+    "Reedmouth_Mart",
+    "Reedmouth_Gym",
+    "Reedmouth_Underpass",
+    "Reedmouth_House1",
+    "Reedmouth_House2",
+    "Reedmouth_Harbour",
+    "Valecrown_PokemonCenter_1F",
+    "Valecrown_Mart",
+    "Valecrown_Gym",
+    "Valecrown_ShoppingCentre",
+    "Valecrown_Casino",
+    "Valecrown_RadioTower",
+    "Valecrown_BikeShop",
+    "Valecrown_FlowerShop",
+    "Valecrown_House1",
+    "Valecrown_House2",
+    "Valecrown_House3",
+    "Valecrown_House4",
+    "Valecrown_House5",
+    "Valecrown_House6"
   ]
 }

@@ -93,12 +93,12 @@ class Town:
         self.map_scripts = []  # (type, label)
 
     # building with a door that leads to an interior map
-    def building(self, stamp, x, y, interior=None):
+    def building(self, stamp, x, y, interior=None, dest_warp=0):
         self.buildings.append((stamp, x, y, interior))
         if interior:
             st = STAMPS[stamp]
             self.warps.append({'x': x + st.door[0], 'y': y + st.door[1], 'elevation': 0,
-                               'dest_map': 'MAP_' + upper_id(interior), 'dest_warp_id': '0'})
+                               'dest_map': 'MAP_' + upper_id(interior), 'dest_warp_id': str(dest_warp)})
             return len(self.warps) - 1
 
     def warp(self, x, y, dest, dest_warp=0, elevation=0):
@@ -163,7 +163,7 @@ class Interior(Town):
         self.layout_id = t['layout']
         # links: template dest map -> (our map name, dest warp id or None to keep)
         for w in t['warp_events']:
-            dest, wid = links.get(w['dest_map'], (None, None))
+            dest, wid = links.get((w['dest_map'], str(w['dest_warp_id'])), links.get(w['dest_map'], (None, None)))
             if dest is None:
                 raise ValueError(f'{name}: no link for warp to {w["dest_map"]}')
             self.warps.append({**w, 'dest_map': 'MAP_' + upper_id(dest) if not dest.startswith('MAP_') else dest,

@@ -44,6 +44,8 @@ def is_sea(mid):
 
 PATH_IDS = {0x118, 0x119, 0x11A, 0x120, 0x121, 0x122, 0x128, 0x129, 0x12A}
 DIRT_IDS = {0x1D0, 0x1D1, 0x1D2, 0x1D8, 0x1D9, 0x1DA, 0x1E0, 0x1E1, 0x1E2}
+PAVE_IDS = {0x3D, 0x3E, 0x3F, 0x4D, 0x4E, 0x4F, 0x5D, 0x5E, 0x5F, 0x65, 0x66, 0x67, 0x45, 0x46, 0x47, 0x55, 0x56, 0x57}
+ROAD_IDS = {0x100, 0x101, 0x102, 0x108, 0x10A, 0x110, 0x111, 0x112, 0x05E}
 ROCK_IDS = set(range(0x068, 0x0B0)) - {0x0A1, 0x0A7} | {0x0E1}
 
 
@@ -62,6 +64,7 @@ def corpus():
             continue
 
 
+GROUNDISH = {0x001, 0x00D, 0x004, 0x015, 0x124} | PATH_IDS
 N8 = [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
 
 
@@ -86,7 +89,8 @@ def learned():
     if os.path.exists(path):
         d = json.load(open(path))
         return {k: {int(m): v for m, v in t.items()} for k, t in d['classes'].items()}, {int(k): v for k, v in d['bits'].items()}
-    classes = {'pond': is_pond, 'sea': is_sea, 'path': PATH_IDS.__contains__, 'dirt': DIRT_IDS.__contains__, 'rock': is_rock}
+    classes = {'pond': is_pond, 'sea': is_sea, 'path': PATH_IDS.__contains__, 'dirt': DIRT_IDS.__contains__, 'rock': is_rock,
+               'pave': PAVE_IDS.__contains__, 'road': ROAD_IDS.__contains__}
     tables = {k: collections.defaultdict(collections.Counter) for k in classes}
     bits = collections.defaultdict(collections.Counter)
     for lay, b in corpus():
@@ -100,7 +104,13 @@ def learned():
                 return mem[min(max(y, 0), h - 1) * w + min(max(x, 0), w - 1)]
             for i, m in enumerate(ids):
                 if mem[i] and m < 512:
-                    tables[name][mask_at(get, i % w, i // w, name == 'rock')][m] += 1
+                    x, y = i % w, i // w
+                    if name in ('pond', 'sea'):
+                        # learn shores only from water that meets plain ground
+                        nb = [ids[min(max(y + dy, 0), h - 1) * w + min(max(x + dx, 0), w - 1)] for dx, dy in N8]
+                        if any(not pred(n) and n not in GROUNDISH for n in nb):
+                            continue
+                    tables[name][mask_at(get, x, y, name == 'rock')][m] += 1
     out = {k: {m: c.most_common(1)[0][0] for m, c in t.items()} for k, t in tables.items()}
     bitmode = {m: c.most_common(1)[0][0] for m, c in bits.items()}
     json.dump({'classes': {k: {str(m): v for m, v in t.items()} for k, t in out.items()}, 'bits': {str(k): v for k, v in bitmode.items()}}, open(path, 'w'))
@@ -136,7 +146,7 @@ class Stamp:
 STAMPS = {
     # name: Stamp(layout, x, y, w, h, door offset)
     'pokecenter': Stamp('LAYOUT_PETALBURG_CITY', 19, 13, 4, 4, (1, 3)),
-    'mart': Stamp('LAYOUT_OLDALE_TOWN', 13, 3, 4, 4, (1, 3)),
+    'mart': Stamp('LAYOUT_MAUVILLE_CITY', 22, 11, 4, 4, (1, 3)),
     'gym': Stamp('LAYOUT_PETALBURG_CITY', 12, 4, 6, 5, (3, 4)),
     'house4': Stamp('LAYOUT_PETALBURG_CITY', 9, 16, 4, 4, (1, 3)),
     'house5': Stamp('LAYOUT_PETALBURG_CITY', 5, 2, 5, 4, (2, 3)),
@@ -144,6 +154,14 @@ STAMPS = {
     'home_b': Stamp('LAYOUT_LITTLEROOT_TOWN', 13, 4, 5, 5, (1, 4)),
     'lab': Stamp('LAYOUT_LITTLEROOT_TOWN', 3, 12, 7, 5, (4, 4)),
     'cottage': Stamp('LAYOUT_OLDALE_TOWN', 4, 4, 4, 4, (1, 3)),
+    # gTileset_Mauville
+    'mv_house': Stamp('LAYOUT_MAUVILLE_CITY', 18, 11, 4, 4, (1, 3)),
+    'mv_house5': Stamp('LAYOUT_MAUVILLE_CITY', 31, 11, 5, 4, (1, 3)),
+    'mv_bikeshop': Stamp('LAYOUT_MAUVILLE_CITY', 34, 2, 5, 4, (1, 3)),
+    'mv_gamecorner': Stamp('LAYOUT_MAUVILLE_CITY', 5, 10, 7, 4, (3, 3)),
+    'mv_tower': Stamp('LAYOUT_MAUVILLE_CITY', 36, 11, 4, 5, None),
+    # gTileset_Fortree
+    'institute': Stamp('LAYOUT_ROUTE119', 1, 26, 11, 8, (5, 6)),
 }
 
 # ---------------------------------------------------------------- canvas
@@ -192,6 +210,8 @@ class MapArt:
                     put(x, y, blk(FLOWER))
                 elif ch == 's':
                     put(x, y, blk(SIGN, 1, 0))
+                elif ch == 'b':
+                    put(x, y, blk(0x124, 0, 3))
         # trees on the 2x2 grid; out-of-map counts as forest
         def tree(cx, cy):
             if cx < 0 or cy < 0 or cx * 2 >= w or cy * 2 >= h:
@@ -221,8 +241,8 @@ class MapArt:
                             put(x + i, y - 1, blk(b if ch == ',' else a, 0, 3))
         # autotiled classes
         for cls, ch, coll, elev, fb in (('pond', '~', 0, 1, 0x0A1), ('sea', '≈', 0, 1, 0x170), ('path', '=', 0, 3, 0x121),
-                                        ('dirt', ':', 0, 3, 0x1D9), ('rock', '^', 1, 0, 0x071)):
-            get = lambda x, y, ch=ch: self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) in (ch, 'C') if ch == '^' else \
+                                        ('dirt', ':', 0, 3, 0x1D9), ('rock', '^', 1, 0, 0x071), ('pave', 'p', 0, 3, 0x066), ('road', 'R', 0, 3, 0x05E)):
+            get = lambda x, y, ch=ch: self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) in (ch, 'C', 'S', 'W') if ch == '^' else \
                 self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) == ch
             for y in range(h):
                 for x in range(w):
@@ -231,8 +251,18 @@ class MapArt:
         # cave entrances in rock faces
         for y in range(h):
             for x in range(w):
-                if self.chars[y][x] == 'C':
+                ch = self.chars[y][x]
+                if ch == 'C':
                     put(x, y, blk(0x0A7, 0, 0))
+                elif ch == 'S':  # stairs through a cliff, two wide
+                    put(x, y, blk(0x0CF if self.c(x - 1, y) == 'S' else 0x0AF, 0, 3))
+                elif ch == 'W':  # waterfall; the water below it gets foam
+                    top = self.c(x, y - 1) != 'W'
+                    left = self.c(x - 1, y) != 'W'
+                    put(x, y, blk((0x0BB if left else 0x0B3) if top else 0x0B9, 0, 1))
+                    if self.c(x, y + 1) in ('~', '≈'):
+                        r = self.c(x + 1, y) != 'W'
+                        put(x, y + 1, blk(0x02C if left else (0x03C if r else 0x034), 0, 1))
         # ledges: runs of '_' (jump south)
         for y in range(h):
             for x in range(w):

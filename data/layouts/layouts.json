@@ -9343,6 +9343,105 @@
       "border_filepath": "data/layouts/KaldriaRoute1/border.bin",
       "blockdata_filepath": "data/layouts/KaldriaRoute1/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDRIA_ROUTE2",
+      "name": "KaldriaRoute2_Layout",
+      "width": 28,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/KaldriaRoute2/border.bin",
+      "blockdata_filepath": "data/layouts/KaldriaRoute2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LETHYS_DAM",
+      "name": "LethysDam_Layout",
+      "width": 56,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/LethysDam/border.bin",
+      "blockdata_filepath": "data/layouts/LethysDam/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDRIA_ROUTE3",
+      "name": "KaldriaRoute3_Layout",
+      "width": 84,
+      "height": 36,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/KaldriaRoute3/border.bin",
+      "blockdata_filepath": "data/layouts/KaldriaRoute3/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDRIA_ROUTE4",
+      "name": "KaldriaRoute4_Layout",
+      "width": 40,
+      "height": 66,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Fortree",
+      "border_filepath": "data/layouts/KaldriaRoute4/border.bin",
+      "blockdata_filepath": "data/layouts/KaldriaRoute4/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LANTERNCROSS",
+      "name": "Lanterncross_Layout",
+      "width": 52,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/Lanterncross/border.bin",
+      "blockdata_filepath": "data/layouts/Lanterncross/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_REEDMOUTH",
+      "name": "Reedmouth_Layout",
+      "width": 52,
+      "height": 36,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/Reedmouth/border.bin",
+      "blockdata_filepath": "data/layouts/Reedmouth/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_VALECROWN",
+      "name": "Valecrown_Layout",
+      "width": 72,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/Valecrown/border.bin",
+      "blockdata_filepath": "data/layouts/Valecrown/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LETHYS_DELTA",
+      "name": "LethysDelta_Layout",
+      "width": 52,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/LethysDelta/border.bin",
+      "blockdata_filepath": "data/layouts/LethysDelta/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_VALECROWN_BEACH",
+      "name": "ValecrownBeach_Layout",
+      "width": 72,
+      "height": 14,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/ValecrownBeach/border.bin",
+      "blockdata_filepath": "data/layouts/ValecrownBeach/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
