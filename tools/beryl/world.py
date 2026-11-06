@@ -328,11 +328,12 @@ def lanterncross(c):
     c.rect(120, 60, 121, 65, '=').rect(120, 62, 121, 63, '=')
     c.rect(144, 74, 147, 75, '=')
     vbridge(c, 83, 92, 101)
-    c.building('gate_back', 82, 62)
     hall = t.building('gatehouse', 82, 63, 'Lanterncross_Temple')
-    t.warp(85, 68, 'MAP_LANTERNCROSS_TEMPLE', 0)
-    t.warp(84, 62, 'MAP_LANTERNCROSS_TEMPLE', 1)
-    t.warp(85, 62, 'MAP_LANTERNCROSS_TEMPLE', 1)
+    gx, gy = c.stamps[-1][1:3]
+    c.building('gate_back', gx, gy - 1)
+    t.warp(gx + 3, gy + 5, 'MAP_LANTERNCROSS_TEMPLE', 0)
+    t.warp(gx + 2, gy - 1, 'MAP_LANTERNCROSS_TEMPLE', 1)
+    t.warp(gx + 3, gy - 1, 'MAP_LANTERNCROSS_TEMPLE', 1)
     tower = t.building('tower', 88, 77, 'Lanterncross_Tower')
     t.sign(86, 60, 'LANTERNCROSS TEMPLE\nThe road goes through the temple. Please walk quietly.')
     t.sign(92, 85, 'LANTERN TOWER\nThe lanterns are lit for those the river has taken.')
@@ -487,11 +488,16 @@ def beach(c):
     return t
 
 
-def build():
+def build(paint=True):
+    import paint as painting
     c = Canvas(W, H)
+    art = painting.load(c) if paint else None   # Manuel's painted map, if there is one
     terrain(c)
     towns = [stillbrook(c), route1(c), route2(c), dam(c), route4(c), ruins(c), lanterncross(c), reedmouth(c),
              delta(c), valecrown(c)]
+    if art:
+        painting.apply(c, art)
+        painting.check_people(c, towns)
     # anything no map covers is forest
     for y in range(H):
         for x in range(W):
@@ -502,6 +508,11 @@ def build():
 
 
 def main():
+    if '--export-paint' in sys.argv:
+        import paint as painting
+        c, towns = build(paint='--fresh' not in sys.argv)
+        painting.export(c, sys.argv[sys.argv.index('--export-paint') + 1])
+        return
     c, towns = build()
     for p in c.check_edges():
         print('edge:', p)

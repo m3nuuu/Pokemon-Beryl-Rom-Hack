@@ -1,0 +1,212 @@
+{
+ "#ff003c": {
+  "building": "Stillbrook_Gym",
+  "stamp": "gym",
+  "w": 7,
+  "h": 5
+ },
+ "#ff0078": {
+  "building": "Stillbrook_PokemonCenter_1F",
+  "stamp": "pokecenter",
+  "w": 5,
+  "h": 5
+ },
+ "#ff00b4": {
+  "building": "Stillbrook_Mart",
+  "stamp": "mart",
+  "w": 4,
+  "h": 4
+ },
+ "#ff00f0": {
+  "building": "Stillbrook_BerylsHouse_1F",
+  "stamp": "home",
+  "w": 5,
+  "h": 5
+ },
+ "#ff323c": {
+  "building": "Stillbrook_JaspersHouse",
+  "stamp": "home",
+  "w": 5,
+  "h": 5
+ },
+ "#ff3278": {
+  "building": "Stillbrook_House1",
+  "stamp": "home",
+  "w": 5,
+  "h": 5
+ },
+ "#ff32b4": {
+  "building": "KaldriaRoute1_Pension",
+  "stamp": "lab",
+  "w": 7,
+  "h": 5
+ },
+ "#ff32f0": {
+  "building": "KaldriaRoute1_FarmHouse",
+  "stamp": "home",
+  "w": 5,
+  "h": 5
+ },
+ "#ff643c": {
+  "building": "KaldriaRoute1_FlowerShed",
+  "stamp": "home",
+  "w": 5,
+  "h": 5
+ },
+ "#ff6478": {
+  "building": "KaldriaRoute1_Windmill",
+  "stamp": "home",
+  "w": 5,
+  "h": 5
+ },
+ "#ff64b4": {
+  "building": "KaldriaRoute4_PowerStation",
+  "stamp": "power_plant",
+  "w": 11,
+  "h": 7
+ },
+ "#ff64f0": {
+  "building": "Lanterncross_Temple",
+  "stamp": "gatehouse",
+  "w": 6,
+  "h": 7
+ },
+ "#ff963c": {
+  "building": "Lanterncross_Tower",
+  "stamp": "tower",
+  "w": 7,
+  "h": 7
+ },
+ "#ff9678": {
+  "building": "Reedmouth_PokemonCenter_1F",
+  "stamp": "pokecenter",
+  "w": 5,
+  "h": 5
+ },
+ "#ff96b4": {
+  "building": "Reedmouth_Mart",
+  "stamp": "mart",
+  "w": 4,
+  "h": 4
+ },
+ "#ff96f0": {
+  "building": "Reedmouth_Gym",
+  "stamp": "gym_brown",
+  "w": 7,
+  "h": 5
+ },
+ "#ffc83c": {
+  "building": "Reedmouth_Underpass",
+  "stamp": "gate",
+  "w": 4,
+  "h": 4
+ },
+ "#ffc878": {
+  "building": "Reedmouth_House1",
+  "stamp": "verm_house",
+  "w": 4,
+  "h": 4
+ },
+ "#ffc8b4": {
+  "building": "Reedmouth_Harbour",
+  "stamp": "verm_hall",
+  "w": 5,
+  "h": 4
+ },
+ "#ffc8f0": {
+  "building": "Reedmouth_House2",
+  "stamp": "verm_house",
+  "w": 4,
+  "h": 4
+ },
+ "#fffa3c": {
+  "building": "Valecrown_PokemonCenter_1F",
+  "stamp": "pokecenter",
+  "w": 5,
+  "h": 5
+ },
+ "#fffa78": {
+  "building": "Valecrown_Gym",
+  "stamp": "gym",
+  "w": 7,
+  "h": 5
+ },
+ "#fffab4": {
+  "building": "Valecrown_Mart",
+  "stamp": "mart",
+  "w": 4,
+  "h": 4
+ },
+ "#fffaf0": {
+  "building": "Valecrown_Underpass",
+  "stamp": "gate",
+  "w": 4,
+  "h": 4
+ },
+ "#3c00ff": {
+  "building": "Valecrown_RadioTower",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#7800ff": {
+  "building": "Valecrown_ShoppingCentre",
+  "stamp": "dept_store",
+  "w": 9,
+  "h": 10
+ },
+ "#b400ff": {
+  "building": "Valecrown_Casino",
+  "stamp": "casino",
+  "w": 7,
+  "h": 5
+ },
+ "#3c3cff": {
+  "building": "Valecrown_FlowerShop",
+  "stamp": "prize",
+  "w": 3,
+  "h": 4
+ },
+ "#783cff": {
+  "building": "Valecrown_BikeShop",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#b43cff": {
+  "building": "Valecrown_House1",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#3c78ff": {
+  "building": "Valecrown_House2",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#7878ff": {
+  "building": "Valecrown_House3",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#b478ff": {
+  "building": "Valecrown_House4",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#3cb4ff": {
+  "building": "Valecrown_House5",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ },
+ "#78b4ff": {
+  "building": "Valecrown_House6",
+  "stamp": "apartment",
+  "w": 4,
+  "h": 5
+ }
+}

@@ -36,6 +36,9 @@ class Canvas(Grid):
         self.stamps = []    # (stamp name, x, y, interior or None)
         self.regions = {}
         self.blocks = None
+        self.moved = {}      # interior -> (x, y) from a painted map (tools/beryl/paint.py)
+        self.signs = []      # sign posts, put back after a painted map replaces the ground
+        self.painted = False
 
     # ---------------------------------------------------------------- drawing
     def get(self, x, y):
@@ -121,6 +124,10 @@ class Canvas(Grid):
 
     # ---------------------------------------------------------------- buildings
     def building(self, name, x, y, interior=None):
+        """Place a building; returns where it went (a painted map may have moved it)."""
+        if self.painted and name == 'mailbox':
+            return x, y          # the painting has its own mailboxes
+        x, y = self.moved.get(interior, (x, y))
         self.stamps.append((name, x, y, interior))
         st = STAMPS[name]
         # no half trees, rocks or water left under or right around a building
@@ -135,7 +142,7 @@ class Canvas(Grid):
                                 self.set(cx + a, cy + b, '.')
                 elif c in ('^', '~', '≈') and y <= j < y + st.h and x <= i < x + st.w:
                     self.set(i, j, '.')
-        return self
+        return x, y
 
     # ---------------------------------------------------------------- maps
     def region(self, name, x, y, w, h, secondary):
@@ -224,7 +231,7 @@ class Place(Town):
         self.ox, self.oy = x, y
 
     def building(self, stamp, x, y, interior=None, dest_warp=0):
-        self.canvas.building(stamp, x, y, interior)
+        x, y = self.canvas.building(stamp, x, y, interior)
         if interior:
             st = STAMPS[stamp]
             return self.warp(x + st.door[0], y + st.door[1], 'MAP_' + mapgen.upper_id(interior), dest_warp)
@@ -241,6 +248,7 @@ class Place(Town):
         assert self.region.has(x, y), f'{self.name}: sign at {x},{y} is outside the map'
         if post and text is not None:
             self.canvas.set(x, y, 's')
+            self.canvas.signs.append((x, y))
         return super().sign(x - self.ox, y - self.oy, text, post=False, **kw)
 
     def add_to(self, proj):
