@@ -74,7 +74,9 @@
     "gMapGroup_IndoorFiveIslandRoute_Frlg",
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
-    "gMapGroup_IndoorSevenIslandRoute_Frlg"
+    "gMapGroup_IndoorSevenIslandRoute_Frlg",
+    "gMapGroup_KaldriaOutdoor",
+    "gMapGroup_KaldriaIndoor"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -1160,5 +1162,23 @@
   ],
   "gMapGroup_IndoorSevenIslandRoute_Frlg": [
     "SevenIsland_SevaultCanyon_House_Frlg"
+  ],
+  "gMapGroup_KaldriaOutdoor": [
+    "Stillbrook",
+    "KaldriaRoute1"
+  ],
+  "gMapGroup_KaldriaIndoor": [
+    "Stillbrook_PokemonCenter_1F",
+    "Stillbrook_Mart",
+    "Stillbrook_BerylsHouse_1F",
+    "Stillbrook_BerylsHouse_2F",
+    "Stillbrook_JaspersHouse_1F",
+    "Stillbrook_JaspersHouse_2F",
+    "Stillbrook_House1",
+    "Stillbrook_Gym",
+    "KaldriaRoute1_Pension",
+    "KaldriaRoute1_FarmHouse",
+    "KaldriaRoute1_House",
+    "KaldriaRoute1_Windmill"
   ]
 }

@@ -1,0 +1,6 @@
+wait 400
+tap S 60
+tap A 120
+tap A 200
+mash 240
+wait 200
