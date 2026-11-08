@@ -172,41 +172,44 @@ def load(c):
     if bad:
         raise SystemExit(f'{len(bad)} pixels have a colour that is not in the key, e.g. ' +
                          ', '.join(f'{x},{y} = {col}' for x, y, col in bad[:6]))
-    # buildings: the top-left corner of each block
-    found = {}
-    for (x, y), k in cells.items():
-        if k[0] == 'b':
-            fx, fy = found.get(k[1], (x, y))
-            found[k[1]] = (min(fx, x), min(fy, y))
+    # buildings: the top-left corner of each block; a copied block becomes an extra (new) house
+    c.new_houses = []
     for b in key.values():
         name = b['building']
-        if name not in found:
+        blocks = components(cells, ('b', name))
+        if not blocks:
             print(f'paint: {name} is missing from the painting, keeping it where the code puts it')
             continue
-        x, y = found[name]
-        size = sum(1 for (i, j), k in cells.items() if k == ('b', name))
-        if size != b['w'] * b['h'] or any(cells.get((x + i, y + j)) != ('b', name) for i in range(b['w']) for j in range(b['h'])):
-            print(f'paint: {name} is not a whole {b["w"]}x{b["h"]} block at {x},{y}; check it')
+        x, y, w, h = blocks[0]
+        if (w, h) != (b['w'], b['h']):
+            print(f'paint: {name} is {w}x{h} at {x},{y} instead of {b["w"]}x{b["h"]}; check it')
         c.moved[name] = (x, y)
+        for extra in blocks[1:]:
+            print(f'paint: a copy of {name} at {extra[0]},{extra[1]} becomes a new house')
+            c.new_houses.append(extra)
     # new houses: each block of the shared colour, by its top-left corner
-    seen = set()
-    c.new_houses = []
+    c.new_houses += components(cells, ('e', 'newhouse'))
+    c.painted = True
+    return cells
+
+
+def components(cells, want):
+    """(x, y, w, h) of every connected block of cells equal to `want`, top-left first."""
+    seen, out = set(), []
     for (x, y), k in sorted(cells.items(), key=lambda p: (p[0][1], p[0][0])):
-        if k != ('e', 'newhouse') or (x, y) in seen:
+        if k != want or (x, y) in seen:
             continue
         todo, block = [(x, y)], set()
         while todo:
             p = todo.pop()
-            if p in block or cells.get(p) != ('e', 'newhouse'):
+            if p in block or cells.get(p) != want:
                 continue
             block.add(p)
             todo += [(p[0] + 1, p[1]), (p[0] - 1, p[1]), (p[0], p[1] + 1), (p[0], p[1] - 1)]
         seen |= block
-        c.new_houses.append((min(p[0] for p in block), min(p[1] for p in block),
-                             max(p[0] for p in block) - min(p[0] for p in block) + 1,
-                             max(p[1] for p in block) - min(p[1] for p in block) + 1))
-    c.painted = True
-    return cells
+        xs, ys = [p[0] for p in block], [p[1] for p in block]
+        out.append((min(xs), min(ys), max(xs) - min(xs) + 1, max(ys) - min(ys) + 1))
+    return out
 
 
 def add_new_houses(c, towns, room):
@@ -281,10 +284,52 @@ def apply(c, cells):
 def check_people(c, towns):
     """After painting: people and signs left standing in trees, water, cliffs or buildings."""
     inside = {(x + k, y + j) for n, x, y, _ in c.stamps for j in range(STAMPS[n].h) for k in range(STAMPS[n].w)}
+    taken = set()
     for t in towns:
         spots = [(o['x'], o['y'], o['graphics_id']) for o in t.objects] + [(b['x'], b['y'], 'sign') for b in t.bgs]
         for x, y, what in spots:
             wx, wy = x + t.ox, y + t.oy
             on_bridge = kind(c.over.get((wx, wy), 0)) == 'bridge'
             if (wx, wy) in inside or (c.g[wy][wx] in 'T^~≈' and not on_bridge and 'SWIMMER' not in what):
-                print(f'paint: {t.name}: {what} at {wx},{wy} now stands on {c.g[wy][wx]!r}; move it in world.py')
+                nx, ny = free_spot(c, t, wx, wy, inside, taken)
+                print(f'paint: {t.name}: {what} at {wx},{wy} was blocked, moved to {nx},{ny}')
+                move(c, t, x, y, what, nx, ny)
+                taken.add((nx, ny))
+            else:
+                taken.add((wx, wy))
+
+
+WALK = '.,*=pb:'
+
+
+def free_spot(c, t, x, y, inside, taken):
+    """The nearest open tile in the same map, not inside or right in front of a building."""
+    doors = {(sx + STAMPS[n].door[0], sy + STAMPS[n].door[1] + 1) for n, sx, sy, _ in c.stamps if STAMPS[n].door}
+    for r in range(1, 30):
+        ring = [(x + dx, y + dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1) if max(abs(dx), abs(dy)) == r]
+        ring.sort(key=lambda p: abs(p[0] - x) + abs(p[1] - y))
+        for p in ring:
+            if t.region.has(*p) and c.g[p[1]][p[0]] in WALK and p not in inside and p not in doors and p not in taken \
+                    and (p[0], p[1]) not in c.over:
+                return p
+    return x, y
+
+
+def move(c, t, x, y, what, nx, ny):
+    lx, ly = nx - t.ox, ny - t.oy
+    if what == 'sign':
+        b = next(b for b in t.bgs if (b['x'], b['y']) == (x, y))
+        b['x'], b['y'] = lx, ly
+        wx, wy = x + t.ox, y + t.oy
+        if c.g[wy][wx] == 's':
+            c.g[wy][wx] = '.'
+        board = c.over.get((wx, wy - 1), 0) & 0x3FF == 0x160
+        if board:   # the red gym board on its post moves along
+            post = c.over.pop((wx, wy))
+            c.over[(nx, ny - 1)] = c.over.pop((wx, wy - 1))
+            c.over[(nx, ny)] = post
+        else:
+            c.g[ny][nx] = 's'
+    else:
+        o = next(o for o in t.objects if (o['x'], o['y']) == (x, y))
+        o['x'], o['y'] = lx, ly

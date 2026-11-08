@@ -353,16 +353,16 @@
     {
       "id": "HEAL_LOCATION_STILLBROOK",
       "map": "MAP_STILLBROOK",
-      "x": 20,
-      "y": 20,
+      "x": 15,
+      "y": 21,
       "respawn_map": "MAP_STILLBROOK_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_STILLBROOK_NURSE"
     },
     {
       "id": "HEAL_LOCATION_REEDMOUTH",
       "map": "MAP_REEDMOUTH",
-      "x": 16,
-      "y": 9,
+      "x": 34,
+      "y": 11,
       "respawn_map": "MAP_REEDMOUTH_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_REEDMOUTH_NURSE"
     },

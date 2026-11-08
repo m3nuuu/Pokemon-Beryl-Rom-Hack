@@ -17,7 +17,7 @@
   "connections": [
     {
       "map": "MAP_KALDRIA_ROUTE4",
-      "offset": 30,
+      "offset": 26,
       "direction": "up"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "map": "MAP_LETHYS_DELTA",
-      "offset": -72,
+      "offset": -68,
       "direction": "down"
     }
   ],
@@ -170,36 +170,36 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 38,
-      "y": 55,
+      "x": 37,
+      "y": 56,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_UNDERPASS",
       "dest_warp_id": "0"
     },
     {
-      "x": 22,
+      "x": 29,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_RADIO_TOWER",
       "dest_warp_id": "0"
     },
     {
-      "x": 47,
+      "x": 41,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_SHOPPING_CENTRE",
       "dest_warp_id": "0"
     },
     {
-      "x": 25,
-      "y": 54,
+      "x": 23,
+      "y": 57,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_CASINO",
       "dest_warp_id": "0"
     },
     {
-      "x": 28,
-      "y": 69,
+      "x": 30,
+      "y": 57,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_FLOWER_SHOP",
       "dest_warp_id": "0"
@@ -251,6 +251,34 @@
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE6",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 52,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN_NEW_HOUSE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 66,
+      "y": 56,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN_NEW_HOUSE2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 38,
+      "y": 69,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN_NEW_HOUSE3",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 38,
+      "y": 75,
+      "elevation": 0,
+      "dest_map": "MAP_VALECROWN_NEW_HOUSE4",
       "dest_warp_id": "0"
     }
   ],

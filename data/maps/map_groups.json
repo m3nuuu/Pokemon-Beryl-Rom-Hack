@@ -1183,6 +1183,7 @@
     "Stillbrook_JaspersHouse",
     "Stillbrook_Gym",
     "Stillbrook_House1",
+    "Stillbrook_NewHouse1",
     "KaldriaRoute1_Pension",
     "KaldriaRoute1_FarmHouse",
     "KaldriaRoute1_FlowerShed",
@@ -1197,6 +1198,9 @@
     "Reedmouth_House1",
     "Reedmouth_Harbour",
     "Reedmouth_House2",
+    "Reedmouth_NewHouse1",
+    "Reedmouth_NewHouse2",
+    "Reedmouth_NewHouse3",
     "Valecrown_PokemonCenter_1F",
     "Valecrown_Mart",
     "Valecrown_Gym",
@@ -1211,6 +1215,10 @@
     "Valecrown_House3",
     "Valecrown_House4",
     "Valecrown_House5",
-    "Valecrown_House6"
+    "Valecrown_House6",
+    "Valecrown_NewHouse1",
+    "Valecrown_NewHouse2",
+    "Valecrown_NewHouse3",
+    "Valecrown_NewHouse4"
   ]
 }

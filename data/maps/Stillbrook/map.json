@@ -73,8 +73,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_FRLG",
-      "x": 16,
-      "y": 28,
+      "x": 15,
+      "y": 27,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 3,
@@ -113,7 +113,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER_FRLG",
       "x": 36,
-      "y": 16,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -185,38 +185,45 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 20,
-      "y": 19,
+      "x": 15,
+      "y": 20,
       "elevation": 0,
       "dest_map": "MAP_STILLBROOK_POKEMON_CENTER_1F",
       "dest_warp_id": "0"
     },
     {
-      "x": 33,
-      "y": 19,
+      "x": 22,
+      "y": 20,
       "elevation": 0,
       "dest_map": "MAP_STILLBROOK_MART",
       "dest_warp_id": "0"
     },
     {
-      "x": 13,
-      "y": 38,
+      "x": 9,
+      "y": 34,
       "elevation": 0,
       "dest_map": "MAP_STILLBROOK_BERYLS_HOUSE_1F",
       "dest_warp_id": "0"
     },
     {
-      "x": 33,
+      "x": 27,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_STILLBROOK_JASPERS_HOUSE",
       "dest_warp_id": "0"
     },
     {
-      "x": 33,
-      "y": 46,
+      "x": 27,
+      "y": 42,
       "elevation": 0,
       "dest_map": "MAP_STILLBROOK_HOUSE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 50,
+      "y": 42,
+      "elevation": 0,
+      "dest_map": "MAP_STILLBROOK_NEW_HOUSE1",
       "dest_warp_id": "0"
     }
   ],
@@ -249,7 +256,7 @@
     {
       "type": "sign",
       "x": 30,
-      "y": 32,
+      "y": 33,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "Stillbrook_EventScript_Sign4"

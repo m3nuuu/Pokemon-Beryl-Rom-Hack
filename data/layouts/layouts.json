@@ -9340,7 +9340,7 @@
     {
       "id": "LAYOUT_STILLBROOK",
       "name": "Stillbrook_Layout",
-      "width": 58,
+      "width": 62,
       "height": 72,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_Stillbrook",
@@ -9353,7 +9353,7 @@
     {
       "id": "LAYOUT_KALDRIA_ROUTE1",
       "name": "KaldriaRoute1_Layout",
-      "width": 58,
+      "width": 62,
       "height": 70,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_Stillbrook",
@@ -9366,7 +9366,7 @@
     {
       "id": "LAYOUT_KALDRIA_ROUTE2",
       "name": "KaldriaRoute2_Layout",
-      "width": 38,
+      "width": 34,
       "height": 44,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_Stillbrook",
@@ -9379,7 +9379,7 @@
     {
       "id": "LAYOUT_LETHYS_DAM",
       "name": "LethysDam_Layout",
-      "width": 64,
+      "width": 60,
       "height": 32,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_Stillbrook",
@@ -9392,7 +9392,7 @@
     {
       "id": "LAYOUT_KALDRIA_ROUTE4",
       "name": "KaldriaRoute4_Layout",
-      "width": 52,
+      "width": 56,
       "height": 58,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_LavenderTown",
@@ -9405,7 +9405,7 @@
     {
       "id": "LAYOUT_KALDRIA_ROUTE3",
       "name": "KaldriaRoute3_Layout",
-      "width": 64,
+      "width": 60,
       "height": 26,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_LavenderTown",
@@ -9418,7 +9418,7 @@
     {
       "id": "LAYOUT_LANTERNCROSS",
       "name": "Lanterncross_Layout",
-      "width": 72,
+      "width": 68,
       "height": 46,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_LavenderTown",
@@ -9431,7 +9431,7 @@
     {
       "id": "LAYOUT_REEDMOUTH",
       "name": "Reedmouth_Layout",
-      "width": 72,
+      "width": 68,
       "height": 40,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_VermilionCity",
@@ -9444,7 +9444,7 @@
     {
       "id": "LAYOUT_LETHYS_DELTA",
       "name": "LethysDelta_Layout",
-      "width": 154,
+      "width": 150,
       "height": 22,
       "primary_tileset": "gTileset_General_Frlg",
       "secondary_tileset": "gTileset_CeladonCity",

@@ -126,7 +126,7 @@ def terrain(c):
 def stillbrook(c):
     """Beryl's home town, after the drawing: Fighting Gym, Poké Center and Super Market in a row
     under the ridge, Jasper's home and one more house east of the road south, Beryl's home west."""
-    t = Place(c, 'Stillbrook', 0, 24, 58, 72, STILLBROOK, mapsec='MAPSEC_PALLET_TOWN', music='MUS_RG_PALLET',
+    t = Place(c, 'Stillbrook', 0, 24, 62, 72, STILLBROOK, mapsec='MAPSEC_PALLET_TOWN', music='MUS_RG_PALLET',
               weather='WEATHER_LEAVES')
     c.trees(0, 38, 1, 95)
     # main street under the top row, the path from the cave
@@ -199,7 +199,7 @@ def stillbrook(c):
 def route1(c):
     """South of Stillbrook: the Pension with its garden and flower fields, the farm, the fields and
     the windmill. The road east goes on to Reedmouth."""
-    t = Place(c, 'KaldriaRoute1', 0, 96, 58, 70, STILLBROOK, mapsec='MAPSEC_ROUTE_1', music='MUS_RG_ROUTE1',
+    t = Place(c, 'KaldriaRoute1', 0, 96, 62, 70, STILLBROOK, mapsec='MAPSEC_ROUTE_1', music='MUS_RG_ROUTE1',
               map_type='MAP_TYPE_ROUTE', weather='WEATHER_LEAVES')
     c.trees(0, 96, 5, 165).trees(0, 160, 57, 165)
     # the road: down from Stillbrook, east past the Pension, then south to the fields
@@ -254,7 +254,7 @@ def route1(c):
 
 # ---------------------------------------------------------------- Route 2 and the dam
 def route2(c):
-    t = Place(c, 'KaldriaRoute2', 58, 14, 38, 44, STILLBROOK, mapsec='MAPSEC_ROUTE_2', music='MUS_RG_ROUTE1',
+    t = Place(c, 'KaldriaRoute2', 62, 14, 34, 44, STILLBROOK, mapsec='MAPSEC_ROUTE_2', music='MUS_RG_ROUTE1',
               map_type='MAP_TYPE_ROUTE')
     t.sign(64, 39, 'ROUTE 2\nUp: LETHYS DAM\nWest: STILLBROOK')
     t.npc('OBJ_EVENT_GFX_HIKER_FRLG', 70, 33, 'From up here you can hear the dam humming. All that water, held back by one wall!', move='MOVEMENT_TYPE_FACE_RIGHT')
@@ -263,7 +263,7 @@ def route2(c):
 
 
 def dam(c):
-    t = Place(c, 'LethysDam', 96, 0, 64, 32, STILLBROOK, mapsec='MAPSEC_ROUTE_3', music='MUS_RG_ROUTE24',
+    t = Place(c, 'LethysDam', 96, 0, 60, 32, STILLBROOK, mapsec='MAPSEC_ROUTE_3', music='MUS_RG_ROUTE24',
               map_type='MAP_TYPE_ROUTE')
     t.npc('OBJ_EVENT_GFX_WORKER_M', 128, 18, 'LETHYS DAM: the power for all of KALDRIA. Please stay on the walkway.', move='MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT', rx=4)
     t.npc('OBJ_EVENT_GFX_FISHER', 110, 18, 'MIRRORMERE is so still you can see the mountains in it. Not many fish bite, though.', move='MOVEMENT_TYPE_FACE_UP')
@@ -273,7 +273,7 @@ def dam(c):
 def route4(c):
     """The power station on the high ground east of the dam, the one-way drop under it, and the road
     down to the capital."""
-    t = Place(c, 'KaldriaRoute4', 160, 0, 52, 58, LAVENDER, mapsec='MAPSEC_ROUTE_5', music='MUS_RG_ROUTE24',
+    t = Place(c, 'KaldriaRoute4', 156, 0, 56, 58, LAVENDER, mapsec='MAPSEC_ROUTE_5', music='MUS_RG_ROUTE24',
               map_type='MAP_TYPE_ROUTE')
     c.road([(163, 28), (163, 57)])
     c.rect(166, 6, 172, 15, ',').rect(190, 6, 203, 15, ',').trees(158, 4, 163, 15)
@@ -291,7 +291,7 @@ def route4(c):
 
 def ruins(c):
     """Below the dam: the river basin and the Lowbank Ruins on its south bank."""
-    t = Place(c, 'KaldriaRoute3', 96, 32, 64, 26, LAVENDER, mapsec='MAPSEC_ROUTE_4', music='MUS_RG_ROUTE3',
+    t = Place(c, 'KaldriaRoute3', 96, 32, 60, 26, LAVENDER, mapsec='MAPSEC_ROUTE_4', music='MUS_RG_ROUTE3',
               map_type='MAP_TYPE_ROUTE')
     # paved ground with broken walls
     c.poly([(104, 57), (104, 53), (122, 47), (140, 41), (152, 37), (158, 37), (158, 57)], ',', only='.')
@@ -311,7 +311,7 @@ def lanterncross(c):
     """The Lanterncross Temple: the road from the ruins goes in through the temple's gatehouse and
     out of its front doors, then over the Lethys to Reedmouth. LEADER ODA keeps her gym in the
     lantern tower inside the temple grounds. East of it, the park."""
-    t = Place(c, 'Lanterncross', 58, 58, 72, 46, LAVENDER, mapsec='MAPSEC_POKEMON_TOWER', music='MUS_RG_LAVENDER')
+    t = Place(c, 'Lanterncross', 62, 58, 68, 46, LAVENDER, mapsec='MAPSEC_POKEMON_TOWER', music='MUS_RG_LAVENDER')
     c.road([(82, 58), (164, 58)])           # the road from the capital past the ruins
     c.road([(84, 59), (84, 61)])
     # temple grounds: walls of trees, the gatehouse the only way in
@@ -357,7 +357,7 @@ def lanterncross(c):
 # ---------------------------------------------------------------- Reedmouth and the delta
 def reedmouth(c):
     """Where the Lethys meets the sea: Grass gym, harbour, and the underpass to the capital."""
-    t = Place(c, 'Reedmouth', 58, 104, 72, 40, VERMILION, mapsec='MAPSEC_VERMILION_CITY', music='MUS_RG_VERMILLION',
+    t = Place(c, 'Reedmouth', 62, 104, 68, 40, VERMILION, mapsec='MAPSEC_VERMILION_CITY', music='MUS_RG_VERMILLION',
               map_type='MAP_TYPE_CITY')
     c.road([(58, 117), (120, 117)])
     c.road([(84, 102), (84, 116)])
@@ -373,7 +373,7 @@ def reedmouth(c):
     under = t.building('gate', 116, 113, 'Reedmouth_Underpass')
     gym_sign(t, 108, 113, 'REEDMOUTH POKéMON GYM\nLEADER: SEDGE\nRooted in the delta!')
     t.sign(115, 116, 'UNDERPASS\nUnder the LETHYS to VALECROWN CITY', facing='BG_EVENT_PLAYER_FACING_ANY')
-    t.sign(60, 116, 'REEDMOUTH\nThe river ends, the sea begins.')
+    t.sign(64, 116, 'REEDMOUTH\nThe river ends, the sea begins.')
     vbridge(c, 112, 136, 147)
     t.npc('OBJ_EVENT_GFX_SAILOR_FRLG', 102, 134, 'The harbour ferry runs up the LETHYS when the water is high enough. These days it hardly ever is.', move='MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT', rx=3)
     t.npc('OBJ_EVENT_GFX_FISHER', 113, 143, 'Fresh water meets salt water right here. You can catch all sorts!', move='MOVEMENT_TYPE_FACE_DOWN')
@@ -395,7 +395,7 @@ def reedmouth(c):
 
 
 def delta(c):
-    t = Place(c, 'LethysDelta', 58, 144, 154, 22, CELADON, mapsec='MAPSEC_ROUTE_6', music='MUS_RG_ROUTE11',
+    t = Place(c, 'LethysDelta', 62, 144, 150, 22, CELADON, mapsec='MAPSEC_ROUTE_6', music='MUS_RG_ROUTE11',
               map_type='MAP_TYPE_ROUTE')
     t.npc('OBJ_EVENT_GFX_FISHER', 84, 159, 'The LETHYS DELTA. Everything the river carries ends up here.', move='MOVEMENT_TYPE_FACE_DOWN')
     t.npc('OBJ_EVENT_GFX_TUBER_F_FRLG', 170, 147, 'The sea is so warm today!', move=WANDER, rx=3, ry=1)
