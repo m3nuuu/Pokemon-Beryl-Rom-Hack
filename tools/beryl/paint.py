@@ -41,6 +41,14 @@ EXTRA = {
     'bridge': ((110, 60, 20), 'wooden bridge (north-south, 3 wide)'),
     'bush': ((80, 170, 40), 'round bush'),
     'mailbox': ((255, 0, 0), 'mailbox, 1 wide x 2 tall (Stillbrook only)'),
+    'newhouse': ((0, 255, 255), 'new house: Stillbrook/Route 1 5x5, Reedmouth 4x4, Valecrown 4x5, Lanterncross 5x4'),
+}
+# the house that fits each town's tiles, its size and the room inside
+HOUSES = {
+    'gTileset_Stillbrook': ('home', 'PalletTown_RivalsHouse_Frlg'),
+    'gTileset_VermilionCity': ('verm_house', 'VermilionCity_House1_Frlg'),
+    'gTileset_CeladonCity': ('apartment', 'CeladonCity_House1_Frlg'),
+    'gTileset_LavenderTown': ('lav_house', 'LavenderTown_House1_Frlg'),
 }
 FENCE_IDS = {0x0E7, 0x0EC, 0x0ED, 0x0FC, 0x0FD, 0x0F4, 0x0F5}
 PICKET_IDS = {0x287, 0x288, 0x290}
@@ -81,7 +89,12 @@ def export(c, out):
         k = kind(v)
         if k and 0 <= x < c.w and 0 <= y < c.h:
             px[x, y] = EXTRA[k][0]
-    named = [(n, x, y, i) for n, x, y, i in c.stamps if i]
+    named = [(n, x, y, i) for n, x, y, i in c.stamps if i and '_NewHouse' not in i]
+    for n, x, y, i in c.stamps:
+        if i and '_NewHouse' in i:
+            for j in range(STAMPS[n].h):
+                for k in range(STAMPS[n].w):
+                    px[x + k, y + j] = EXTRA['newhouse'][0]
     cols = building_colours(len(named))
     key = {}
     for (n, x, y, i), col in zip(named, cols):
@@ -175,8 +188,41 @@ def load(c):
         if size != b['w'] * b['h'] or any(cells.get((x + i, y + j)) != ('b', name) for i in range(b['w']) for j in range(b['h'])):
             print(f'paint: {name} is not a whole {b["w"]}x{b["h"]} block at {x},{y}; check it')
         c.moved[name] = (x, y)
+    # new houses: each block of the shared colour, by its top-left corner
+    seen = set()
+    c.new_houses = []
+    for (x, y), k in sorted(cells.items(), key=lambda p: (p[0][1], p[0][0])):
+        if k != ('e', 'newhouse') or (x, y) in seen:
+            continue
+        todo, block = [(x, y)], set()
+        while todo:
+            p = todo.pop()
+            if p in block or cells.get(p) != ('e', 'newhouse'):
+                continue
+            block.add(p)
+            todo += [(p[0] + 1, p[1]), (p[0] - 1, p[1]), (p[0], p[1] + 1), (p[0], p[1] - 1)]
+        seen |= block
+        c.new_houses.append((min(p[0] for p in block), min(p[1] for p in block),
+                             max(p[0] for p in block) - min(p[0] for p in block) + 1,
+                             max(p[1] for p in block) - min(p[1] for p in block) + 1))
     c.painted = True
     return cells
+
+
+def add_new_houses(c, towns, room):
+    """Turn every painted new-house block into a house with a room inside, in whichever map it is."""
+    count = {}
+    for x, y, w, h in c.new_houses:
+        t = next((t for t in towns if t.region.has(x, y)), None)
+        if t is None or t.secondary not in HOUSES:
+            print(f'paint: the new house at {x},{y} is in a map without houses; skipped')
+            continue
+        st, tpl = HOUSES[t.secondary]
+        if (w, h) != (STAMPS[st].w, STAMPS[st].h):
+            print(f'paint: the new house at {x},{y} is {w}x{h}, houses in {t.name} are {STAMPS[st].w}x{STAMPS[st].h}; '
+                  'it is placed from its top-left corner')
+        count[t.name] = count.get(t.name, 0) + 1
+        room(t, st, x, y, f'{t.name}_NewHouse{count[t.name]}', tpl)
 
 
 def apply(c, cells):

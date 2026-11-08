@@ -496,6 +496,7 @@ def build(paint=True):
     towns = [stillbrook(c), route1(c), route2(c), dam(c), route4(c), ruins(c), lanterncross(c), reedmouth(c),
              delta(c), valecrown(c)]
     if art:
+        painting.add_new_houses(c, towns, room)
         painting.apply(c, art)
         painting.check_people(c, towns)
     # anything no map covers is forest
