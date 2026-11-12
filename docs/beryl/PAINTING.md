@@ -12,6 +12,12 @@
 * Small houses: paint a block in the small-house colour (RGB 0 190 190). In Valecrown that is a 4x5 apartment you can enter; elsewhere it is the town's normal house.
 * City buildings you cannot enter (Valecrown only): RGB 60 60 70 for a 5x8 tall block, RGB 150 150 160 for a 7x8 wide block.
 * Mailboxes, fences, picket fences, bridges and bushes are painted too.
+* Mountains: level 1 (RGB 150 100 60) is a grass plateau. Only its rim is drawn as a cliff and the inside is
+  grass, so a 1-pixel ring of level 1 around any area raises it. Levels 2 and 3 are rocky mountains on top.
+  Stairs (RGB 100 100 100) lead up through a rim.
+* Very tall grass (RGB 0 150 90): Emerald's long grass. You wade through it and wild POKéMON live in it.
+* City street (RGB 90 90 140): Saffron's cobbles, for Valecrown. Keep streets 8 tiles away from Valecrown's
+  map edges, since neighbouring maps cannot draw them; out there they turn back into paths.
 * People, signs and what happens inside buildings stay in `tools/beryl/world.py`; after a repaint
   the script lists anyone left standing in a tree, a cliff, water or a building.
 * `python3 tools/beryl/world.py --export-paint DIR` writes a fresh template, key and guide.

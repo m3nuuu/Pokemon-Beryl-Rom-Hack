@@ -20,6 +20,7 @@ KEY = os.path.join(HERE, 'kaldria_south_key.json')
 COLOURS = {
     '.': ((120, 200, 100), 'grass'),
     ',': ((40, 130, 50), 'tall grass (wild POKéMON)'),
+    'V': ((0, 150, 90), 'very tall grass (wild POKéMON, you wade through it)'),
     '*': ((200, 90, 150), 'flowers'),
     'T': ((20, 80, 30), 'trees'),
     '^': ((150, 100, 60), 'mountain / cliff, level 1'),
@@ -29,6 +30,7 @@ COLOURS = {
     '≈': ((20, 50, 160), 'sea water'),
     '=': ((230, 210, 120), 'path'),
     'p': ((185, 185, 195), 'paving'),
+    'K': ((90, 90, 140), 'city street (Valecrown)'),
     'b': ((240, 230, 170), 'sand'),
     ':': ((150, 100, 40), 'tilled soil'),
     'C': ((30, 20, 20), 'cave entrance (in a cliff)'),
@@ -334,7 +336,7 @@ def check_people(c, towns):
                 taken.add((wx, wy))
 
 
-WALK = '.,*=pb:'
+WALK = '.,*=pb:VK'
 
 
 def free_spot(c, t, x, y, inside, taken):

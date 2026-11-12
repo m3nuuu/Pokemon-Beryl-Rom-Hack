@@ -120,7 +120,7 @@ class Canvas(Grid):
         for dx, dy in ((0, -1), (0, 1), (-1, 0), (1, 0)):
             v = self.get(x + dx, y + dy)
             if v is not None and v not in member:
-                return v if v in '.,*=bp:' else '.'
+                return v if v in '.,*=bp:VK' else '.'
         return '.'
 
     # ---------------------------------------------------------------- buildings
@@ -210,7 +210,7 @@ class Canvas(Grid):
                     if src is None:
                         if inside and self.g[y][x] != 'T':
                             bare.append((x, y))
-                    elif (b[y * self.w + x] & 0x3FF) >= NPRI and src.secondary != r.secondary and \
+                    elif (b[y * self.w + x] & 0x3FF) >= NPRI and (b[y * self.w + x] & 0x3FF) not in mapgen.SHARED_IMPORTS and src.secondary != r.secondary and \
                             mapgen.SAME_TILES.get(src.secondary, src.secondary) != mapgen.SAME_TILES.get(r.secondary, r.secondary):
                         wrong.append((x, y))
             if wrong:

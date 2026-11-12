@@ -125,8 +125,17 @@ def learned():
     return out, bitmode
 
 
+@lru_cache(None)
+def sandy_rocks():
+    """Cliff pieces drawn over sand: Kaldria's cliffs stand on grass, so these are left out."""
+    metas = render.load_tileset(PRIMARY)[2]
+    return frozenset(m for m in ROCK_IDS if any(v >> 12 == 5 for v in metas[m][:4]))
+
+
 def autotile(cls, mask, fallback):
     table = learned()[0][cls]
+    if cls == 'rock':
+        table = {m: v for m, v in table.items() if v not in sandy_rocks()}
     if mask in table:
         return table[mask]
     # nearest known mask by differing bits, preferring the orthogonal ones
@@ -207,6 +216,12 @@ TREE_END, TREE_END_OPEN = (0x024, 0x025), (0x026, 0x027)
 CANOPY, CANOPY_TALL = (0x00E, 0x00F), (0x00B, 0x00C)
 
 
+# metatiles tools/beryl/tileimport.py adds to every Kaldria tileset, at the same ids
+from tileimport import IDS as IMPORTED  # noqa: E402
+# imports that look the same in every tileset, so they may show across a map edge
+SHARED_IMPORTS = {IMPORTED['long_grass']}
+
+
 def grass(x, y):
     return GRASS4[y & 1][x & 1]
 
@@ -229,9 +244,18 @@ class MapArt:
             return self.chars[y][x]
         return None
 
+    def green_tops(self):
+        """The first mountain level is a grass plateau: only its rim stays cliff, the inside becomes grass."""
+        rock = ('^', 'M', 'N', 'C', 'S', 'W')
+        inner = [(x, y) for y in range(self.h) for x in range(self.w) if self.chars[y][x] == '^' and
+                 all(self.c(x + dx, y + dy) in rock + (None,) for dx, dy in N8)]
+        for x, y in inner:
+            self.chars[y][x] = '.'
+
     def build(self):
         w, h = self.w, self.h
         bits = learned()[1]
+        self.green_tops()
         out = [blk(grass(i % w, i // w)) for i in range(w * h)]
         put = lambda x, y, v: out.__setitem__(y * w + x, v)
         # plain ground
@@ -246,13 +270,17 @@ class MapArt:
                     put(x, y, blk(SIGN, 1, 0))
                 elif ch == 'b':
                     put(x, y, blk(SAND))
+                elif ch == 'V':
+                    put(x, y, blk(IMPORTED['long_grass']))
+                elif ch == 'K':
+                    put(x, y, blk(IMPORTED['street']))
         # trees on the 2x2 grid; out-of-map counts as forest
         def tree(cx, cy):
             if cx < 0 or cy < 0 or cx * 2 >= w or cy * 2 >= h:
                 return True
             cell = [self.c(cx * 2 + i, cy * 2 + j) for i in range(2) for j in range(2)]
             # a tree needs its whole 2x2 cell: a path, cliff, water or the like in it wins
-            return 'T' in cell and all(ch in (None, 'T', '.', ',', '*') for ch in cell)
+            return 'T' in cell and all(ch in (None, 'T', '.', ',', '*', 'V') for ch in cell)
         for cy in range((h + 1) // 2):
             for cx in range((w + 1) // 2):
                 if not (cx * 2 < w and cy * 2 < h and tree(cx, cy)):
