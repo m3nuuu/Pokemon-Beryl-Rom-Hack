@@ -28,8 +28,7 @@ const struct Tileset gTileset_SecretBaseRedCave =
 const struct Tileset *const gTilesetPointer_SecretBase = &gTileset_SecretBase;
 const struct Tileset *const gTilesetPointer_SecretBaseRedCave = &gTileset_SecretBaseRedCave;
 
-#if !IS_FRLG
-
+// Beryl: Emerald's General tileset is in the FireRed build too, for the Valecrown pilot
 const struct Tileset gTileset_General =
 {
     .isCompressed = TRUE,
@@ -40,6 +39,8 @@ const struct Tileset gTileset_General =
     .metatileAttributes = gMetatileAttributes_General,
     .callback = InitTilesetAnim_General,
 };
+
+#if !IS_FRLG
 
 const struct Tileset gTileset_Petalburg =
 {
@@ -1553,3 +1554,15 @@ const struct Tileset gTileset_HallOfFame =
 };
 
 #endif // IS_FRLG
+
+// Team Aqua's Brick City, drawn for Emerald's General tileset (Valecrown pilot)
+const struct Tileset gTileset_BrickCity =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BrickCity,
+    .palettes = gTilesetPalettes_BrickCity,
+    .metatiles = gMetatiles_BrickCity,
+    .metatileAttributes = gMetatileAttributes_BrickCity,
+    .callback = NULL,
+};

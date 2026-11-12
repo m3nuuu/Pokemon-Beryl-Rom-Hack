@@ -576,6 +576,9 @@ def main():
     PROJ.mapsec_names.update(MAPSEC_NAMES)
     for t in towns:
         t.add_to(PROJ)
+    if '--pilot-valecrown' in sys.argv:
+        import pilot
+        pilot.redraw(c, next(t for t in towns if t.name == 'Valecrown'), PROJ)
     PROJ.write()
     if '--render' in sys.argv:
         out = sys.argv[sys.argv.index('--render') + 1]
