@@ -24,5 +24,14 @@ Imported so far, all from tilesets already in the decomp:
 * very tall grass: Emerald's long grass (General tileset, metatile 0x015)
 * city street: Saffron City's cobbles (metatiles 0x2E9 and 0x2EC, with Saffron's palette in Celadon's free slot)
 
+### Valecrown pilot (Emerald base)
+`python3 tools/beryl/world.py --pilot-valecrown` redraws Valecrown with Emerald's General tileset and
+Brick City (see `tools/beryl/pilot.py`). `tools/beryl/brickcity.py` converts Brick City from the unpacked
+repo into `data/tilesets/secondary/brick_city` and reads its example town into
+`tools/beryl/brick_city_example.json`, where the buildings are cut from. Emerald layouts can be part of the
+FireRed build when their `layouts.json` entry has `"all_versions": true`.
+
 ### Used in Beryl
-(none yet)
+* **Brick City** (Tilesets/The Great Tileset Exchange/Full Tilesets/Brick City Secondary), Valecrown pilot.
+  Free for non-commercial use. Credit: Ekat (Ekat99), Vurtax (FRLG rips), Heartlessdragoon (RSE rips),
+  Alistar (tree bases and short grass patches), Slimshady (mailboxes); imported to pokeemerald by Kumatora.

@@ -43,6 +43,7 @@ extern const struct Tileset gTileset_TrainerHill;
 extern const struct Tileset gTileset_General_Frlg;
 extern const struct Tileset gTileset_PalletTown;
 extern const struct Tileset gTileset_Stillbrook;
+extern const struct Tileset gTileset_BrickCity;
 extern const struct Tileset gTileset_ViridianCity;
 extern const struct Tileset gTileset_PewterCity;
 extern const struct Tileset gTileset_SaffronCity;
