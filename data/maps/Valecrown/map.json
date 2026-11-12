@@ -187,7 +187,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
-      "x": 70,
+      "x": 71,
       "y": 32,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -201,8 +201,8 @@
   ],
   "warp_events": [
     {
-      "x": 23,
-      "y": 22,
+      "x": 22,
+      "y": 28,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_POKEMON_CENTER_1F",
       "dest_warp_id": "0"
@@ -223,7 +223,7 @@
     },
     {
       "x": 29,
-      "y": 12,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_RADIO_TOWER",
       "dest_warp_id": "0"
@@ -250,15 +250,15 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 38,
-      "y": 81,
+      "x": 37,
+      "y": 75,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_BIKE_SHOP",
       "dest_warp_id": "0"
     },
     {
       "x": 29,
-      "y": 22,
+      "y": 28,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_HOUSE1",
       "dest_warp_id": "0"
@@ -327,43 +327,43 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 16,
-      "y": 12,
+      "x": 19,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL1",
       "dest_warp_id": "0"
     },
     {
-      "x": 21,
-      "y": 12,
+      "x": 24,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL2",
       "dest_warp_id": "0"
     },
     {
-      "x": 62,
-      "y": 25,
+      "x": 65,
+      "y": 23,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL3",
       "dest_warp_id": "0"
     },
     {
-      "x": 60,
-      "y": 35,
+      "x": 63,
+      "y": 33,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL4",
       "dest_warp_id": "0"
     },
     {
-      "x": 65,
-      "y": 35,
+      "x": 68,
+      "y": 33,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL5",
       "dest_warp_id": "0"
     },
     {
-      "x": 62,
-      "y": 45,
+      "x": 65,
+      "y": 43,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL6",
       "dest_warp_id": "0"
@@ -384,21 +384,21 @@
     },
     {
       "x": 22,
-      "y": 66,
+      "y": 64,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL9",
       "dest_warp_id": "0"
     },
     {
       "x": 27,
-      "y": 66,
+      "y": 64,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL10",
       "dest_warp_id": "0"
     },
     {
       "x": 28,
-      "y": 75,
+      "y": 73,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN_NEW_SMALL11",
       "dest_warp_id": "0"
@@ -440,7 +440,7 @@
     },
     {
       "type": "sign",
-      "x": 19,
+      "x": 20,
       "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
