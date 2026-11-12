@@ -25,3 +25,7 @@ KaldriaRoute2_EventScript_Npc2::
 KaldriaRoute2_EventScript_Npc2_Text:
 	.string "These steps were cut when they\n"
 	.string "built the dam. My legs hate them.$"
+
+KaldriaRoute2_EventScript_Item3::
+	finditem ITEM_ETHER
+	end

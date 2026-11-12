@@ -98,45 +98,61 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Lanterncross_EventScript_Npc4",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 59,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lanterncross_EventScript_Item5",
+      "flag": "FLAG_UNUSED_0x4A9"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER_FRLG",
+      "x": 64,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lanterncross_EventScript_Npc6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER_FRLG",
+      "x": 59,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lanterncross_EventScript_Npc7",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CLEFAIRY",
+      "x": 62,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lanterncross_EventScript_Npc8",
+      "flag": "0"
     }
   ],
-  "warp_events": [
-    {
-      "x": 22,
-      "y": 10,
-      "elevation": 0,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 23,
-      "y": 10,
-      "elevation": 0,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 22,
-      "y": 4,
-      "elevation": 0,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "1"
-    },
-    {
-      "x": 23,
-      "y": 4,
-      "elevation": 0,
-      "dest_map": "MAP_LANTERNCROSS_TEMPLE",
-      "dest_warp_id": "1"
-    },
-    {
-      "x": 29,
-      "y": 25,
-      "elevation": 0,
-      "dest_map": "MAP_LANTERNCROSS_TOWER",
-      "dest_warp_id": "0"
-    }
-  ],
+  "warp_events": [],
   "coord_events": [],
   "bg_events": [
     {
@@ -162,6 +178,16 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "Lanterncross_EventScript_Sign3"
+    },
+    {
+      "type": "hidden_item",
+      "x": 46,
+      "y": 26,
+      "elevation": 3,
+      "item": "ITEM_ESCAPE_ROPE",
+      "flag": "FLAG_HIDDEN_ITEM_UNUSED_0x2C",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

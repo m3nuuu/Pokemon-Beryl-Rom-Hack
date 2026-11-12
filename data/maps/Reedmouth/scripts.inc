@@ -57,3 +57,16 @@ Reedmouth_EventScript_Npc4::
 
 Reedmouth_EventScript_Npc4_Text:
 	.string "Seel!$"
+
+Reedmouth_EventScript_Item5::
+	finditem ITEM_MYSTIC_WATER
+	end
+
+Reedmouth_EventScript_Npc6::
+	msgbox Reedmouth_EventScript_Npc6_Text, MSGBOX_NPC
+	end
+
+Reedmouth_EventScript_Npc6_Text:
+	.string "I have fished here for sixty\n"
+	.string "years. The biggest one always gets\p"
+	.string "away.$"

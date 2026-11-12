@@ -57,3 +57,30 @@ Lanterncross_EventScript_Npc4::
 Lanterncross_EventScript_Npc4_Text:
 	.string "I come here to read. The capital\n"
 	.string "is so loud!$"
+
+Lanterncross_EventScript_Item5::
+	finditem ITEM_MIRACLE_SEED
+	end
+
+Lanterncross_EventScript_Npc6::
+	msgbox Lanterncross_EventScript_Npc6_Text, MSGBOX_NPC
+	end
+
+Lanterncross_EventScript_Npc6_Text:
+	.string "A picnic in the park, the best way\n"
+	.string "to spend a day off!$"
+
+Lanterncross_EventScript_Npc7::
+	msgbox Lanterncross_EventScript_Npc7_Text, MSGBOX_NPC
+	end
+
+Lanterncross_EventScript_Npc7_Text:
+	.string "The bug POKéMON in this park are\n"
+	.string "the biggest in KALDRIA!$"
+
+Lanterncross_EventScript_Npc8::
+	msgbox Lanterncross_EventScript_Npc8_Text, MSGBOX_NPC
+	end
+
+Lanterncross_EventScript_Npc8_Text:
+	.string "Clef!$"

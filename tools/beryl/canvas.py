@@ -273,3 +273,17 @@ class Place(Town):
         }, mapgen.GROUP_OUT, self.scripts())
         for it in self.interiors:
             it.add_to(proj)
+
+
+def item(t, x, y, item_id, flag):
+    """A POKé BALL lying on the ground with an item in it."""
+    label = f'{t.name}_EventScript_Item{len(t.objects) + 1}'
+    t.script_parts.append(f'{label}::\n\tfinditem {item_id}\n\tend\n')
+    t.npc('OBJ_EVENT_GFX_ITEM_BALL', x, y, script=label, flag=flag)
+
+
+def hidden(t, x, y, item_id, flag):
+    """An item hidden in the ground (found by searching or with the ITEMFINDER)."""
+    assert t.region.has(x, y), f'{t.name}: hidden item at {x},{y} is outside the map'
+    t.bgs.append({'type': 'hidden_item', 'x': x - t.ox, 'y': y - t.oy, 'elevation': 3, 'item': item_id,
+                  'flag': flag, 'quantity': 1, 'underfoot': False})

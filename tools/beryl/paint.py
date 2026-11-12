@@ -44,7 +44,12 @@ EXTRA = {
     'bush': ((80, 170, 40), 'round bush'),
     'mailbox': ((255, 0, 0), 'mailbox, 1 wide x 2 tall (Stillbrook only)'),
     'newhouse': ((0, 255, 255), 'new house: Stillbrook/Route 1 5x5, Reedmouth 4x4, Valecrown 7x8, Lanterncross 5x4'),
+    'newsmall': ((0, 190, 190), 'new small house: Valecrown 4x5 (elsewhere the same as a new house)'),
+    'deco_tall': ((60, 60, 70), 'city building you cannot enter, 5x8 (Valecrown only)'),
+    'deco_wide': ((150, 150, 160), 'city building you cannot enter, 7x8 (Valecrown only)'),
 }
+# what each painted new-building colour turns into: per town tileset, (stamp, inside or None)
+DECO = {'deco_tall': 'block_tall', 'deco_wide': 'block_wide'}
 # the house that fits each town's tiles, its size and the room inside
 HOUSES = {
     'gTileset_Stillbrook': ('home', 'PalletTown_RivalsHouse_Frlg'),
@@ -52,6 +57,20 @@ HOUSES = {
     'gTileset_CeladonCity': ('condo', 'CeladonCity_House1_Frlg'),
     'gTileset_LavenderTown': ('lav_house', 'LavenderTown_House1_Frlg'),
 }
+SMALL = {**HOUSES, 'gTileset_CeladonCity': ('apartment', 'CeladonCity_House1_Frlg')}
+# someone at home in every new house
+RESIDENTS = [
+    ('OBJ_EVENT_GFX_WOMAN_1_FRLG', "Oh! A visitor! Sorry about the mess, I wasn't expecting anyone."),
+    ('OBJ_EVENT_GFX_OLD_MAN_1', 'In my day we walked everywhere. Bikes! Pah!'),
+    ('OBJ_EVENT_GFX_LITTLE_GIRL_FRLG', 'When I grow up I want a POKéMON that can swim up the whole LETHYS!'),
+    ('OBJ_EVENT_GFX_MAN', 'The power went out again last night. Third time this month.'),
+    ('OBJ_EVENT_GFX_LASS_FRLG', 'Have you been to the park? The POKéMON there come right up to you.'),
+    ('OBJ_EVENT_GFX_OLD_WOMAN_FRLG', 'Wipe your feet, dear. ...Well, come in, then.'),
+    ('OBJ_EVENT_GFX_YOUNGSTER_FRLG', "My dad says there's something hidden in the old ruins. He won't tell me what."),
+    ('OBJ_EVENT_GFX_FAT_MAN_FRLG', "I'd offer you a snack, but I ate them all."),
+    ('OBJ_EVENT_GFX_BEAUTY_FRLG', 'They say a strange POKéMON was seen near the dam at night.'),
+    ('OBJ_EVENT_GFX_GENTLEMAN_FRLG', 'I collect old maps of KALDRIA. The river used to run somewhere else entirely!'),
+]
 FENCE_IDS = {0x0E7, 0x0EC, 0x0ED, 0x0FC, 0x0FD, 0x0F4, 0x0F5}
 PICKET_IDS = {0x287, 0x288, 0x290}
 BRIDGE_IDS = {0x1C5, 0x1C6, 0x1C7}
@@ -91,12 +110,14 @@ def export(c, out):
         k = kind(v)
         if k and 0 <= x < c.w and 0 <= y < c.h:
             px[x, y] = EXTRA[k][0]
-    named = [(n, x, y, i) for n, x, y, i in c.stamps if i and '_NewHouse' not in i]
+    named = [(n, x, y, i) for n, x, y, i in c.stamps if i and '_New' not in i]
     for n, x, y, i in c.stamps:
-        if i and '_NewHouse' in i:
+        e = 'newhouse' if i and '_NewHouse' in i else 'newsmall' if i and '_NewSmall' in i else \
+            next((k for k, v in DECO.items() if v == n and not i), None)
+        if e:
             for j in range(STAMPS[n].h):
                 for k in range(STAMPS[n].w):
-                    px[x + k, y + j] = EXTRA['newhouse'][0]
+                    px[x + k, y + j] = EXTRA[e][0]
     cols = building_colours(len(named))
     key = {}
     for (n, x, y, i), col in zip(named, cols):
@@ -109,7 +130,8 @@ def export(c, out):
         if n == 'mailbox':
             px[x, y] = px[x, y + 1] = EXTRA['mailbox'][0]
     im.save(os.path.join(out, 'kaldria_south.png'))
-    json.dump(key, open(os.path.join(out, 'kaldria_south_key.json'), 'w'), indent=1)
+    # buildings painted out stay out in the next round too
+    json.dump({**key, '_removed': sorted(c.removed)}, open(os.path.join(out, 'kaldria_south_key.json'), 'w'), indent=1)
     legend(c, key, out)
     guide(c, im, out)
 
@@ -159,6 +181,7 @@ def load(c):
     im = Image.open(PAINT).convert('RGB')
     assert im.size == (c.w, c.h), f'{PAINT} must stay {c.w}x{c.h} pixels, it is {im.size[0]}x{im.size[1]}'
     key = json.load(open(KEY))
+    c.removed |= set(key.pop('_removed', []))
     table = {('g', ch): col for ch, (col, _) in COLOURS.items()}
     table.update({('e', k): col for k, (col, _) in EXTRA.items()})
     for hexcol, b in key.items():
@@ -189,9 +212,10 @@ def load(c):
         c.moved[name] = (x, y)
         for extra in blocks[1:]:
             print(f'paint: a copy of {name} at {extra[0]},{extra[1]} becomes a new house')
-            c.new_houses.append(extra)
+            c.new_houses.append(('newhouse',) + extra)
     # new houses: each block of the shared colour, by its top-left corner
-    c.new_houses += components(cells, ('e', 'newhouse'))
+    for e in ('newhouse', 'newsmall', 'deco_tall', 'deco_wide'):
+        c.new_houses += [(e,) + b for b in components(cells, ('e', e))]
     c.painted = True
     return cells
 
@@ -218,17 +242,25 @@ def components(cells, want):
 def add_new_houses(c, towns, room):
     """Turn every painted new-house block into a house with a room inside, in whichever map it is."""
     count = {}
-    for x, y, w, h in c.new_houses:
+    for e, x, y, w, h in c.new_houses:
         t = next((t for t in towns if t.region.has(x, y)), None)
-        if t is None or t.secondary not in HOUSES:
-            print(f'paint: the new house at {x},{y} is in a map without houses; skipped')
+        if t is None or t.secondary not in HOUSES or (e in DECO and t.secondary != 'gTileset_CeladonCity'):
+            print(f'paint: the {e} at {x},{y} is in a map without that kind of building; skipped')
             continue
-        st, tpl = HOUSES[t.secondary]
+        if e in DECO:
+            st, tpl = DECO[e], None
+        else:
+            st, tpl = (SMALL if e == 'newsmall' else HOUSES)[t.secondary]
         if (w, h) != (STAMPS[st].w, STAMPS[st].h):
-            print(f'paint: the new house at {x},{y} is {w}x{h}, houses in {t.name} are {STAMPS[st].w}x{STAMPS[st].h}; '
+            print(f'paint: the {e} at {x},{y} is {w}x{h}, it should be {STAMPS[st].w}x{STAMPS[st].h}; '
                   'it is placed from its top-left corner')
-        count[t.name] = count.get(t.name, 0) + 1
-        room(t, st, x, y, f'{t.name}_NewHouse{count[t.name]}', tpl)
+        if tpl is None:
+            c.building(st, x, y)
+            continue
+        tag = 'NewSmall' if e == 'newsmall' else 'NewHouse'
+        count[(t.name, tag)] = n = count.get((t.name, tag), 0) + 1
+        who = RESIDENTS[(sum(map(ord, t.name)) + n * 7 + len(tag)) % len(RESIDENTS)]
+        room(t, st, x, y, f'{t.name}_{tag}{n}', tpl, [(who[0], 4, 4, who[1], 'MOVEMENT_TYPE_WANDER_AROUND')])
 
 
 def apply(c, cells):
@@ -289,7 +321,7 @@ def check_people(c, towns):
     inside = {(x + k, y + j) for n, x, y, _ in c.stamps for j in range(STAMPS[n].h) for k in range(STAMPS[n].w)}
     taken = set()
     for t in towns:
-        spots = [(o['x'], o['y'], o['graphics_id']) for o in t.objects] + [(b['x'], b['y'], 'sign') for b in t.bgs]
+        spots = [(o['x'], o['y'], o['graphics_id']) for o in t.objects] + [(b['x'], b['y'], b['type']) for b in t.bgs]
         for x, y, what in spots:
             wx, wy = x + t.ox, y + t.oy
             on_bridge = kind(c.over.get((wx, wy), 0)) == 'bridge'
@@ -320,7 +352,10 @@ def free_spot(c, t, x, y, inside, taken):
 
 def move(c, t, x, y, what, nx, ny):
     lx, ly = nx - t.ox, ny - t.oy
-    if what == 'sign':
+    if what == 'hidden_item':
+        b = next(b for b in t.bgs if (b['x'], b['y']) == (x, y))
+        b['x'], b['y'] = lx, ly
+    elif what == 'sign':
         b = next(b for b in t.bgs if (b['x'], b['y']) == (x, y))
         b['x'], b['y'] = lx, ly
         wx, wy = x + t.ox, y + t.oy

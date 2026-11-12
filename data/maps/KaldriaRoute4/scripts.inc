@@ -23,3 +23,16 @@ KaldriaRoute4_EventScript_Npc1_Text:
 	.string "Careful, it's a long drop! You can\n"
 	.string "jump down, but there's no way back\p"
 	.string "up here.$"
+
+KaldriaRoute4_EventScript_Item2::
+	finditem ITEM_HP_UP
+	end
+
+KaldriaRoute4_EventScript_Npc3::
+	msgbox KaldriaRoute4_EventScript_Npc3_Text, MSGBOX_NPC
+	end
+
+KaldriaRoute4_EventScript_Npc3_Text:
+	.string "People say the hills behind the\n"
+	.string "city hide a cave. I haven't found\p"
+	.string "it yet.$"

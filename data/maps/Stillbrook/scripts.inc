@@ -137,3 +137,7 @@ Stillbrook_EventScript_Npc11::
 
 Stillbrook_EventScript_Npc11_Text:
 	.string "Psy...?$"
+
+Stillbrook_EventScript_Item12::
+	finditem ITEM_POTION
+	end

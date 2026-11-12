@@ -101,3 +101,35 @@ Valecrown_EventScript_Npc8_Text:
 	.string "They keep building and building.\n"
 	.string "Every new tower needs more power\p"
 	.string "from the dam.$"
+
+Valecrown_EventScript_Npc9::
+	msgbox Valecrown_EventScript_Npc9_Text, MSGBOX_NPC
+	end
+
+Valecrown_EventScript_Npc9_Text:
+	.string "This city is so loud! I love it!$"
+
+Valecrown_EventScript_Npc10::
+	msgbox Valecrown_EventScript_Npc10_Text, MSGBOX_NPC
+	end
+
+Valecrown_EventScript_Npc10_Text:
+	.string "The shopping centre has\n"
+	.string "everything. I just wish it had\p"
+	.string "more benches.$"
+
+Valecrown_EventScript_Npc11::
+	msgbox Valecrown_EventScript_Npc11_Text, MSGBOX_NPC
+	end
+
+Valecrown_EventScript_Npc11_Text:
+	.string "I'm waiting for my mum. She's been\n"
+	.string "in the bike shop for an hour!$"
+
+Valecrown_EventScript_Npc12::
+	msgbox Valecrown_EventScript_Npc12_Text, MSGBOX_NPC
+	end
+
+Valecrown_EventScript_Npc12_Text:
+	.string "When I was young, all this was\n"
+	.string "fields. Now look at it.$"

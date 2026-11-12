@@ -250,7 +250,9 @@ class MapArt:
         def tree(cx, cy):
             if cx < 0 or cy < 0 or cx * 2 >= w or cy * 2 >= h:
                 return True
-            return any(self.c(cx * 2 + i, cy * 2 + j) == 'T' for i in range(2) for j in range(2))
+            cell = [self.c(cx * 2 + i, cy * 2 + j) for i in range(2) for j in range(2)]
+            # a tree needs its whole 2x2 cell: a path, cliff, water or the like in it wins
+            return 'T' in cell and all(ch in (None, 'T', '.', ',', '*') for ch in cell)
         for cy in range((h + 1) // 2):
             for cx in range((w + 1) // 2):
                 if not (cx * 2 < w and cy * 2 < h and tree(cx, cy)):

@@ -1,10 +1,10 @@
 {
-  "id": "MAP_REEDMOUTH_HARBOUR",
-  "name": "Reedmouth_Harbour",
-  "layout": "LAYOUT_VERMILION_CITY_POKEMON_FAN_CLUB",
-  "music": "MUS_RG_VERMILLION",
+  "id": "MAP_VALECROWN_NEW_SMALL6",
+  "name": "Valecrown_NewSmall6",
+  "layout": "LAYOUT_HOUSE5_FRLG",
+  "music": "MUS_RG_CELADON",
   "region": "REGION_KANTO",
-  "region_map_section": "MAPSEC_VERMILION_CITY",
+  "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -17,40 +17,40 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_SAILOR_FRLG",
-      "x": 5,
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN_FRLG",
+      "x": 4,
       "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Reedmouth_Harbour_EventScript_Npc1",
+      "script": "Valecrown_NewSmall6_EventScript_Npc1",
       "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 4,
-      "y": 10,
+      "x": 3,
+      "y": 7,
       "elevation": 3,
-      "dest_map": "MAP_REEDMOUTH",
-      "dest_warp_id": "5"
+      "dest_map": "MAP_VALECROWN",
+      "dest_warp_id": "23"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_VALECROWN",
+      "dest_warp_id": "23"
     },
     {
       "x": 5,
-      "y": 10,
+      "y": 7,
       "elevation": 3,
-      "dest_map": "MAP_REEDMOUTH",
-      "dest_warp_id": "5"
-    },
-    {
-      "x": 6,
-      "y": 10,
-      "elevation": 3,
-      "dest_map": "MAP_REEDMOUTH",
-      "dest_warp_id": "5"
+      "dest_map": "MAP_VALECROWN",
+      "dest_warp_id": "23"
     }
   ],
   "coord_events": [],

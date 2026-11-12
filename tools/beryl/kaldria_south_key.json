@@ -184,5 +184,11 @@
   "stamp": "condo",
   "w": 7,
   "h": 8
- }
+ },
+ "_removed": [
+  "Lanterncross_Temple",
+  "Lanterncross_Tower",
+  "Reedmouth_Harbour",
+  "Valecrown_Mart"
+ ]
 }

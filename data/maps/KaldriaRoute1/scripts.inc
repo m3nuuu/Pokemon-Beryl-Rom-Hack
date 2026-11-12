@@ -70,3 +70,7 @@ KaldriaRoute1_EventScript_Npc5::
 
 KaldriaRoute1_EventScript_Npc5_Text:
 	.string "Doduo! Doduo!$"
+
+KaldriaRoute1_EventScript_Item6::
+	finditem ITEM_RARE_CANDY
+	end

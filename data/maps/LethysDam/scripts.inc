@@ -18,3 +18,11 @@ LethysDam_EventScript_Npc2_Text:
 	.string "MIRRORMERE is so still you can see\n"
 	.string "the mountains in it. Not many fish\p"
 	.string "bite, though.$"
+
+LethysDam_EventScript_Npc3::
+	msgbox LethysDam_EventScript_Npc3_Text, MSGBOX_NPC
+	end
+
+LethysDam_EventScript_Npc3_Text:
+	.string "What a view! On one side the lake,\n"
+	.string "on the other the whole valley.$"

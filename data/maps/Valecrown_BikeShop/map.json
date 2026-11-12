@@ -36,21 +36,21 @@
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN",
-      "dest_warp_id": "8"
+      "dest_warp_id": "7"
     },
     {
       "x": 5,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_VALECROWN",
-      "dest_warp_id": "8"
+      "dest_warp_id": "7"
     },
     {
       "x": 6,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_VALECROWN",
-      "dest_warp_id": "8"
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

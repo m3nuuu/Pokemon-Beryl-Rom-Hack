@@ -11,7 +11,7 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from kaldria import Interior, pokecenter, mart, room, Project  # noqa: E402
 from mapgen import blk, stamp, STILLBROOK, LAVENDER, VERMILION, CELADON  # noqa: E402
-from canvas import Canvas, Place  # noqa: E402
+from canvas import Canvas, Place, item, hidden  # noqa: E402
 import render  # noqa: E402
 
 PROJ = Project()
@@ -37,6 +37,9 @@ stamp('gate_back', 'LAYOUT_ROUTE5', 22, 32, 6, 1)
 stamp('gatehouse', 'LAYOUT_SAFFRON_CITY', 32, 0, 6, 7, (2, 5))
 # Celadon's tall city block with a door (the Condominiums)
 stamp('condo', 'LAYOUT_CELADON_CITY', 27, 4, 7, 8, (3, 7), secondary=CELADON)
+# Celadon's tall blocks without doors, to fill the city
+stamp('block_tall', 'LAYOUT_CELADON_CITY', 4, 4, 5, 8, secondary=CELADON)
+stamp('block_wide', 'LAYOUT_CELADON_CITY', 18, 4, 7, 8, secondary=CELADON)
 # Vermilion's big brown-roofed gym (primary tiles)
 stamp('gym_brown', 'LAYOUT_VERMILION_CITY', 11, 21, 7, 5, (3, 4))
 
@@ -491,6 +494,55 @@ def beach(c):
     return t
 
 
+# ---------------------------------------------------------------- things to find
+def extras(towns):
+    """Items, hidden items and people that make the quieter places worth a look.
+    Spots are approximate: anything that lands somewhere blocked is moved to the nearest free tile."""
+    t = {x.name: x for x in towns}
+    W_ = WANDER
+    # POKé BALLs on the ground (each needs its own flag)
+    for name, x, y, it, flag in (
+            ('KaldriaRoute2', 70, 32, 'ITEM_ETHER', 'FLAG_UNUSED_0x4A7'),
+            ('KaldriaRoute3', 146, 40, 'ITEM_REVIVE', 'FLAG_UNUSED_0x4A8'),
+            ('Lanterncross', 120, 76, 'ITEM_MIRACLE_SEED', 'FLAG_UNUSED_0x4A9'),
+            ('KaldriaRoute4', 203, 8, 'ITEM_HP_UP', 'FLAG_UNUSED_0x4AA'),
+            ('Reedmouth', 66, 140, 'ITEM_MYSTIC_WATER', 'FLAG_UNUSED_0x4AB'),
+            ('LethysDelta', 84, 159, 'ITEM_BIG_PEARL', 'FLAG_UNUSED_0x4AC'),
+            ('LethysDelta', 205, 148, 'ITEM_STAR_PIECE', 'FLAG_UNUSED_0x4AD'),
+            ('KaldriaRoute1', 22, 157, 'ITEM_RARE_CANDY', 'FLAG_UNUSED_0x4AE'),
+            ('Stillbrook', 4, 90, 'ITEM_POTION', 'FLAG_UNUSED_0x4AF')):
+        item(t[name], x, y, it, flag)
+    # hidden in the ground
+    for name, x, y, it, flag in (
+            ('KaldriaRoute3', 109, 52, 'ITEM_STARDUST', 'FLAG_HIDDEN_ITEM_UNUSED_0x07'),
+            ('KaldriaRoute3', 134, 44, 'ITEM_NUGGET', 'FLAG_HIDDEN_ITEM_UNUSED_0x10'),
+            ('LethysDam', 100, 18, 'ITEM_PEARL', 'FLAG_HIDDEN_ITEM_UNUSED_0x28'),
+            ('Valecrown', 172, 93, 'ITEM_PP_UP', 'FLAG_HIDDEN_ITEM_UNUSED_0x2B'),
+            ('Lanterncross', 110, 84, 'ITEM_ESCAPE_ROPE', 'FLAG_HIDDEN_ITEM_UNUSED_0x2C'),
+            ('LethysDelta', 180, 147, 'ITEM_HEART_SCALE', 'FLAG_HIDDEN_ITEM_UNUSED_0x2D'),
+            ('Stillbrook', 19, 52, 'ITEM_FULL_HEAL', 'FLAG_HIDDEN_ITEM_UNUSED_0x2E'),
+            ('Reedmouth', 120, 128, 'ITEM_SUPER_POTION', 'FLAG_HIDDEN_ITEM_UNUSED_0x7C')):
+        hidden(t[name], x, y, it, flag)
+    # people
+    for name, gfx, x, y, text, mv in (
+            ('KaldriaRoute3', 'OBJ_EVENT_GFX_YOUNGSTER_FRLG', 120, 50, "I found an old coin in these ruins once! Maybe there's more if you look really carefully.", W_),
+            ('KaldriaRoute3', 'OBJ_EVENT_GFX_HIKER_FRLG', 140, 48, 'This was the inn of LOWBANK. Travellers rested here before crossing the river.', 'MOVEMENT_TYPE_FACE_DOWN'),
+            ('LethysDam', 'OBJ_EVENT_GFX_PICNICKER_FRLG', 144, 18, "What a view! On one side the lake, on the other the whole valley.", 'MOVEMENT_TYPE_FACE_UP'),
+            ('KaldriaRoute4', 'OBJ_EVENT_GFX_CAMPER_FRLG', 165, 40, "People say the hills behind the city hide a cave. I haven't found it yet.", W_),
+            ('Lanterncross', 'OBJ_EVENT_GFX_PICNICKER_FRLG', 126, 70, "A picnic in the park, the best way to spend a day off!", 'MOVEMENT_TYPE_FACE_DOWN'),
+            ('Lanterncross', 'OBJ_EVENT_GFX_BUG_CATCHER_FRLG', 116, 80, 'The bug POKéMON in this park are the biggest in KALDRIA!', W_),
+            ('Lanterncross', 'OBJ_EVENT_GFX_CLEFAIRY', 124, 82, 'Clef!', W_),
+            ('LethysDelta', 'OBJ_EVENT_GFX_TUBER_M', 150, 150, 'I built a sand castle, but the sea took it.', W_),
+            ('LethysDelta', 'OBJ_EVENT_GFX_SWIMMER_F_WATER', 172, 158, 'Swimming against the river current is great training!', W_),
+            ('LethysDelta', 'OBJ_EVENT_GFX_COOLTRAINER_F', 190, 147, 'Watching the sun set over the sea is the best part of living in the capital.', 'MOVEMENT_TYPE_FACE_DOWN'),
+            ('Reedmouth', 'OBJ_EVENT_GFX_OLD_MAN_1', 100, 140, 'I have fished here for sixty years. The biggest one always gets away.', 'MOVEMENT_TYPE_FACE_DOWN'),
+            ('Valecrown', 'OBJ_EVENT_GFX_ROCKER', 180, 75, 'This city is so loud! I love it!', W_),
+            ('Valecrown', 'OBJ_EVENT_GFX_WOMAN_2_FRLG', 190, 107, 'The shopping centre has everything. I just wish it had more benches.', W_),
+            ('Valecrown', 'OBJ_EVENT_GFX_LITTLE_GIRL_FRLG', 165, 120, "I'm waiting for my mum. She's been in the bike shop for an hour!", W_),
+            ('Valecrown', 'OBJ_EVENT_GFX_OLD_MAN_1', 200, 90, 'When I was young, all this was fields. Now look at it.', 'MOVEMENT_TYPE_FACE_LEFT')):
+        t[name].npc(gfx, x, y, text, move=mv, rx=2 if mv == W_ else 0, ry=1 if mv == W_ else 0)
+
+
 def build(paint=True):
     import paint as painting
     c = Canvas(W, H)
@@ -498,6 +550,7 @@ def build(paint=True):
     terrain(c)
     towns = [stillbrook(c), route1(c), route2(c), dam(c), route4(c), ruins(c), lanterncross(c), reedmouth(c),
              delta(c), valecrown(c)]
+    extras(towns)
     if art:
         painting.add_new_houses(c, towns, room)
         painting.apply(c, art)

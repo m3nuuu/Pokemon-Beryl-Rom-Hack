@@ -30,3 +30,36 @@ LethysDelta_EventScript_Sign1::
 
 LethysDelta_EventScript_Sign1_Text:
 	.string "VALECROWN BEACH$"
+
+LethysDelta_EventScript_Item4::
+	finditem ITEM_BIG_PEARL
+	end
+
+LethysDelta_EventScript_Item5::
+	finditem ITEM_STAR_PIECE
+	end
+
+LethysDelta_EventScript_Npc6::
+	msgbox LethysDelta_EventScript_Npc6_Text, MSGBOX_NPC
+	end
+
+LethysDelta_EventScript_Npc6_Text:
+	.string "I built a sand castle, but the sea\n"
+	.string "took it.$"
+
+LethysDelta_EventScript_Npc7::
+	msgbox LethysDelta_EventScript_Npc7_Text, MSGBOX_NPC
+	end
+
+LethysDelta_EventScript_Npc7_Text:
+	.string "Swimming against the river current\n"
+	.string "is great training!$"
+
+LethysDelta_EventScript_Npc8::
+	msgbox LethysDelta_EventScript_Npc8_Text, MSGBOX_NPC
+	end
+
+LethysDelta_EventScript_Npc8_Text:
+	.string "Watching the sun set over the sea\n"
+	.string "is the best part of living in the\p"
+	.string "capital.$"
