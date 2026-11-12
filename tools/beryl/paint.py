@@ -22,7 +22,9 @@ COLOURS = {
     ',': ((40, 130, 50), 'tall grass (wild POKéMON)'),
     '*': ((200, 90, 150), 'flowers'),
     'T': ((20, 80, 30), 'trees'),
-    '^': ((150, 100, 60), 'cliff / rock'),
+    '^': ((150, 100, 60), 'mountain / cliff, level 1'),
+    'M': ((115, 70, 40), 'mountain, level 2 (paint on top of level 1)'),
+    'N': ((80, 45, 25), 'mountain, level 3 (paint on top of level 2)'),
     '~': ((70, 130, 230), 'river / lake water'),
     '≈': ((20, 50, 160), 'sea water'),
     '=': ((230, 210, 120), 'path'),
@@ -41,13 +43,13 @@ EXTRA = {
     'bridge': ((110, 60, 20), 'wooden bridge (north-south, 3 wide)'),
     'bush': ((80, 170, 40), 'round bush'),
     'mailbox': ((255, 0, 0), 'mailbox, 1 wide x 2 tall (Stillbrook only)'),
-    'newhouse': ((0, 255, 255), 'new house: Stillbrook/Route 1 5x5, Reedmouth 4x4, Valecrown 4x5, Lanterncross 5x4'),
+    'newhouse': ((0, 255, 255), 'new house: Stillbrook/Route 1 5x5, Reedmouth 4x4, Valecrown 7x8, Lanterncross 5x4'),
 }
 # the house that fits each town's tiles, its size and the room inside
 HOUSES = {
     'gTileset_Stillbrook': ('home', 'PalletTown_RivalsHouse_Frlg'),
     'gTileset_VermilionCity': ('verm_house', 'VermilionCity_House1_Frlg'),
-    'gTileset_CeladonCity': ('apartment', 'CeladonCity_House1_Frlg'),
+    'gTileset_CeladonCity': ('condo', 'CeladonCity_House1_Frlg'),
     'gTileset_LavenderTown': ('lav_house', 'LavenderTown_House1_Frlg'),
 }
 FENCE_IDS = {0x0E7, 0x0EC, 0x0ED, 0x0FC, 0x0FD, 0x0F4, 0x0F5}
@@ -178,7 +180,8 @@ def load(c):
         name = b['building']
         blocks = components(cells, ('b', name))
         if not blocks:
-            print(f'paint: {name} is missing from the painting, keeping it where the code puts it')
+            print(f'paint: {name} is not in the painting, so it is left out')
+            c.removed.add(name)
             continue
         x, y, w, h = blocks[0]
         if (w, h) != (b['w'], b['h']):
@@ -275,7 +278,7 @@ def apply(c, cells):
         st = STAMPS[n]
         for j in range(st.h):
             for k in range(st.w):
-                if c.get(x + k, y + j) in ('T', '^', '~', '≈'):
+                if c.get(x + k, y + j) in ('T', '^', 'M', 'N', '~', '≈'):
                     c.set(x + k, y + j, '.')
     for x, y in c.signs:
         c.g[y][x] = 's'
@@ -290,7 +293,7 @@ def check_people(c, towns):
         for x, y, what in spots:
             wx, wy = x + t.ox, y + t.oy
             on_bridge = kind(c.over.get((wx, wy), 0)) == 'bridge'
-            if (wx, wy) in inside or (c.g[wy][wx] in 'T^~≈' and not on_bridge and 'SWIMMER' not in what):
+            if (wx, wy) in inside or (c.g[wy][wx] in 'T^MN~≈' and not on_bridge and 'SWIMMER' not in what):
                 nx, ny = free_spot(c, t, wx, wy, inside, taken)
                 print(f'paint: {t.name}: {what} at {wx},{wy} was blocked, moved to {nx},{ny}')
                 move(c, t, x, y, what, nx, ny)

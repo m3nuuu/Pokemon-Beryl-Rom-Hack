@@ -35,6 +35,8 @@ MAPSEC_NAMES = {
 # walk in from the north, and the front with the doors
 stamp('gate_back', 'LAYOUT_ROUTE5', 22, 32, 6, 1)
 stamp('gatehouse', 'LAYOUT_SAFFRON_CITY', 32, 0, 6, 7, (2, 5))
+# Celadon's tall city block with a door (the Condominiums)
+stamp('condo', 'LAYOUT_CELADON_CITY', 27, 4, 7, 8, (3, 7), secondary=CELADON)
 # Vermilion's big brown-roofed gym (primary tiles)
 stamp('gym_brown', 'LAYOUT_VERMILION_CITY', 11, 21, 7, 5, (3, 4))
 
@@ -329,11 +331,12 @@ def lanterncross(c):
     c.rect(144, 74, 147, 75, '=')
     vbridge(c, 83, 92, 101)
     hall = t.building('gatehouse', 82, 63, 'Lanterncross_Temple')
-    gx, gy = c.stamps[-1][1:3]
-    c.building('gate_back', gx, gy - 1)
-    t.warp(gx + 3, gy + 5, 'MAP_LANTERNCROSS_TEMPLE', 0)
-    t.warp(gx + 2, gy - 1, 'MAP_LANTERNCROSS_TEMPLE', 1)
-    t.warp(gx + 3, gy - 1, 'MAP_LANTERNCROSS_TEMPLE', 1)
+    if hall is not None:
+        gx, gy = c.stamps[-1][1:3]
+        c.building('gate_back', gx, gy - 1)
+        t.warp(gx + 3, gy + 5, 'MAP_LANTERNCROSS_TEMPLE', 0)
+        t.warp(gx + 2, gy - 1, 'MAP_LANTERNCROSS_TEMPLE', 1)
+        t.warp(gx + 3, gy - 1, 'MAP_LANTERNCROSS_TEMPLE', 1)
     tower = t.building('tower', 88, 77, 'Lanterncross_Tower')
     t.sign(86, 60, 'LANTERNCROSS TEMPLE\nThe road goes through the temple. Please walk quietly.')
     t.sign(92, 85, 'LANTERN TOWER\nThe lanterns are lit for those the river has taken.')
@@ -350,7 +353,7 @@ def lanterncross(c):
     tw = Interior('Lanterncross_Tower', 'PokemonTower_1F_Frlg', {'*': ('Lanterncross', tower)})
     tw.warps = [w for w in tw.warps if w['dest_map'] == 'MAP_LANTERNCROSS']
     tw.npc('OBJ_EVENT_GFX_CHANNELER', 12, 10, "LEADER ODA trains her ghosts upstairs. She isn't receiving challengers yet.")
-    t.interiors += [tp, tw]
+    t.interiors += [i for i, door in ((tp, hall), (tw, tower)) if door is not None]
     return t
 
 
@@ -475,7 +478,7 @@ def valecrown(c):
     gfx = ['OBJ_EVENT_GFX_WOMAN_2_FRLG', 'OBJ_EVENT_GFX_MAN', 'OBJ_EVENT_GFX_LASS_FRLG', 'OBJ_EVENT_GFX_ROCKER',
            'OBJ_EVENT_GFX_OLD_MAN_1', 'OBJ_EVENT_GFX_COOLTRAINER_M']
     for i, ((x, y), text) in enumerate(zip(spots, texts)):
-        room(t, 'apartment', x, y, f'Valecrown_House{i + 1}', tpls[i], [(gfx[i], 4, 4, text, WANDER)])
+        room(t, 'condo', x, y, f'Valecrown_House{i + 1}', tpls[i], [(gfx[i], 4, 4, text, WANDER)])
         c.road([(x + 1, y + 5), (x + 1, y + 5)])
     return t
 

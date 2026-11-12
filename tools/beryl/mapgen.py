@@ -275,8 +275,10 @@ class MapArt:
                             put(x + i, y - 1, blk((CANOPY_TALL if ch == ',' else CANOPY)[i], 0, 3))
         # autotiled classes
         for cls, ch, coll, elev, fb in (('pond', '~', 0, 1, 0x1A4), ('sea', '≈', 0, 1, 0x1D9), ('path', '=', 0, 3, 0x0DC),
-                                        ('dirt', ':', 0, 3, 0x0D9), ('rock', '^', 1, 0, 0x071), ('pave', 'p', 0, 3, 0x16E), ('road', 'R', 0, 3, 0x16E)):
-            members = {'^': ('^', 'C', 'S', 'W'), '~': ('~', '≈'), '≈': ('~', '≈')}.get(ch, (ch,))
+                                        ('dirt', ':', 0, 3, 0x0D9), ('rock', '^', 1, 0, 0x071), ('rock', 'M', 1, 0, 0x071), ('rock', 'N', 1, 0, 0x071), ('pave', 'p', 0, 3, 0x16E), ('road', 'R', 0, 3, 0x16E)):
+            # mountains in levels: each level is a cliff standing on the one below
+            members = {'^': ('^', 'M', 'N', 'C', 'S', 'W'), 'M': ('M', 'N', 'S'), 'N': ('N', 'S'),
+                       '~': ('~', '≈'), '≈': ('~', '≈')}.get(ch, (ch,))
             get = lambda x, y, members=members: self.c(min(max(x, 0), w - 1), min(max(y, 0), h - 1)) in members
             for y in range(h):
                 for x in range(w):

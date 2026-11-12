@@ -184,6 +184,8 @@ def room(town, stamp, x, y, name, template, npcs=(), **kw):
     """A building on `town` whose inside is a copy of `template`; every exit leads back to the door.
     npcs: (gfx, x, y, text[, movement]) tuples."""
     door = town.building(stamp, x, y, name)
+    if door is None:
+        return None
     it = Interior(name, template, {'*': (town.name, door)}, **kw)
     for n in npcs:
         gfx, nx, ny, text = n[:4]
@@ -231,6 +233,8 @@ def pokecenter(town, x, y, heal_id, proj_heals):
     """A Pokémon Center building, its inside, nurse and heal location."""
     inside = f'{town.name}_PokemonCenter_1F'
     door = town.building('pokecenter', x, y, inside)
+    if door is None:
+        return None
     it = Interior(inside, 'ViridianCity_PokemonCenter_1F_Frlg',
                   {'MAP_VIRIDIAN_CITY': (town.name, door), 'MAP_VIRIDIAN_CITY_POKEMON_CENTER_2F': (town.name, door)})
     # the stairs to the 2F have nowhere to go yet
@@ -254,6 +258,8 @@ def pokecenter(town, x, y, heal_id, proj_heals):
 def mart(town, x, y, items):
     inside = f'{town.name}_Mart'
     door = town.building('mart', x, y, inside)
+    if door is None:
+        return None
     it = Interior(inside, 'ViridianCity_Mart_Frlg', {'MAP_VIRIDIAN_CITY': (town.name, door)})
     lab = f'{inside}_EventScript_Clerk'
     it.script_parts.append(f'{lab}::\n\tlock\n\tfaceplayer\n\tmessage gText_HowMayIServeYou\n\twaitmessage\n'

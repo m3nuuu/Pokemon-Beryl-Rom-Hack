@@ -36,7 +36,8 @@ class Canvas(Grid):
         self.stamps = []    # (stamp name, x, y, interior or None)
         self.regions = {}
         self.blocks = None
-        self.moved = {}      # interior -> (x, y) from a painted map (tools/beryl/paint.py)
+        self.moved = {}
+        self.removed = set()      # interior -> (x, y) from a painted map (tools/beryl/paint.py)
         self.signs = []      # sign posts, put back after a painted map replaces the ground
         self.painted = False
 
@@ -127,6 +128,8 @@ class Canvas(Grid):
         """Place a building; returns where it went (a painted map may have moved it)."""
         if self.painted and name == 'mailbox':
             return x, y          # the painting has its own mailboxes
+        if interior in self.removed:
+            return None          # painted out on purpose
         x, y = self.moved.get(interior, (x, y))
         self.stamps.append((name, x, y, interior))
         st = STAMPS[name]
@@ -140,7 +143,7 @@ class Canvas(Grid):
                         for b in range(2):
                             if self.get(cx + a, cy + b) == 'T':
                                 self.set(cx + a, cy + b, '.')
-                elif c in ('^', '~', '≈') and y <= j < y + st.h and x <= i < x + st.w:
+                elif c in ('^', 'M', 'N', '~', '≈') and y <= j < y + st.h and x <= i < x + st.w:
                     self.set(i, j, '.')
         return x, y
 
@@ -231,7 +234,10 @@ class Place(Town):
         self.ox, self.oy = x, y
 
     def building(self, stamp, x, y, interior=None, dest_warp=0):
-        x, y = self.canvas.building(stamp, x, y, interior)
+        at = self.canvas.building(stamp, x, y, interior)
+        if at is None:
+            return None
+        x, y = at
         if interior:
             st = STAMPS[stamp]
             return self.warp(x + st.door[0], y + st.door[1], 'MAP_' + mapgen.upper_id(interior), dest_warp)
