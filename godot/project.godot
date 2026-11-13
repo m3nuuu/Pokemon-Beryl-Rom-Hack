@@ -1,0 +1,35 @@
+; Engine configuration file.
+; Godot 4.3+. Open this folder in the Godot editor, or run it with `godot --path godot`.
+
+config_version=5
+
+[application]
+
+config/name="Pokémon Beryl"
+config/description="Private fan game. Painted maps, classic turn-based battles."
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Data="*res://scripts/autoload/data.gd"
+Game="*res://scripts/autoload/game.gd"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+environment/defaults/default_clear_color=Color(0.06, 0.06, 0.08, 1)
