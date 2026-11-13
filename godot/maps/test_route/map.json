@@ -1,0 +1,75 @@
+{
+  "name": "Route 1 (test)",
+  "music": "",
+  "connections": {
+    "south": {
+      "map": "test_town",
+      "offset": 0
+    }
+  },
+  "warps": [],
+  "npcs": [
+    {
+      "id": "hiker",
+      "x": 17,
+      "y": 26,
+      "sprite": "npc_hiker",
+      "facing": "right",
+      "wander": true,
+      "dialogue": [
+        "Route trainers will battle you here later.",
+        "For now I just like the view."
+      ]
+    }
+  ],
+  "signs": [
+    {
+      "x": 18,
+      "y": 39,
+      "text": [
+        "ROUTE 1 (test)",
+        "The ledge to the north-east can only be jumped down."
+      ]
+    }
+  ],
+  "encounters": {
+    "grass": [
+      {
+        "species": "pipwing",
+        "min": 3,
+        "max": 5,
+        "weight": 30
+      },
+      {
+        "species": "caddibuzz",
+        "min": 3,
+        "max": 5,
+        "weight": 25
+      },
+      {
+        "species": "murkfin",
+        "min": 3,
+        "max": 5,
+        "weight": 10
+      },
+      {
+        "species": "geodling",
+        "min": 4,
+        "max": 5,
+        "weight": 15
+      },
+      {
+        "species": "wispjel",
+        "min": 4,
+        "max": 6,
+        "weight": 10
+      },
+      {
+        "species": "lochlet",
+        "min": 4,
+        "max": 6,
+        "weight": 10
+      }
+    ]
+  }
+}

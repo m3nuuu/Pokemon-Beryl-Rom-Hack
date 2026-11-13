@@ -1,0 +1,105 @@
+{
+  "name": "Test Town",
+  "music": "",
+  "connections": {
+    "north": {
+      "map": "test_route",
+      "offset": 0
+    }
+  },
+  "warps": [
+    {
+      "x": 8,
+      "y": 12,
+      "to": "test_house",
+      "to_x": 5,
+      "to_y": 8,
+      "facing": "up"
+    },
+    {
+      "x": 30,
+      "y": 11,
+      "to": "test_house",
+      "to_x": 5,
+      "to_y": 8,
+      "facing": "up"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "girl",
+      "x": 15,
+      "y": 15,
+      "sprite": "npc_girl",
+      "facing": "down",
+      "wander": true,
+      "dialogue": [
+        "Hi! This is the first test of the new STILLBROOK.",
+        "The whole town is one painted picture. No tiles!",
+        "Try the tall grass to the east. Wild POK\u00e9MON live there."
+      ]
+    },
+    {
+      "id": "oldman",
+      "x": 23,
+      "y": 11,
+      "sprite": "npc_oldman",
+      "facing": "left",
+      "wander": false,
+      "dialogue": [
+        "The road north leads to ROUTE 1.",
+        "Walk right through, there is no loading screen."
+      ]
+    }
+  ],
+  "signs": [
+    {
+      "x": 12,
+      "y": 13,
+      "text": [
+        "BERYL'S HOUSE"
+      ]
+    },
+    {
+      "x": 22,
+      "y": 6,
+      "text": [
+        "NORTH: ROUTE 1",
+        "SOUTH: work in progress"
+      ]
+    }
+  ],
+  "encounters": {
+    "grass": [
+      {
+        "species": "pipwing",
+        "min": 2,
+        "max": 4,
+        "weight": 35
+      },
+      {
+        "species": "caddibuzz",
+        "min": 2,
+        "max": 4,
+        "weight": 30
+      },
+      {
+        "species": "hivecub",
+        "min": 3,
+        "max": 4,
+        "weight": 20
+      },
+      {
+        "species": "pixling",
+        "min": 3,
+        "max": 5,
+        "weight": 15
+      }
+    ]
+  },
+  "player_start": {
+    "x": 8,
+    "y": 14,
+    "facing": "down"
+  }
+}
